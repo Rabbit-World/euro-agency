@@ -1,0 +1,201 @@
+{
+  "quiz_title": "GDPR Knowledge Challenge",
+  "quiz_description": "Test your knowledge of the General Data Protection Regulation (GDPR) with these 15 questions covering key concepts, rights, and compliance requirements.",
+  "questions": [
+    {
+      "id": 1,
+      "difficulty": "easy",
+      "question": "What does GDPR stand for?",
+      "options": [
+        "General Data Protection Regulation",
+        "Global Data Privacy Rules",
+        "Government Data Processing Requirements",
+        "General Digital Privacy Rights"
+      ],
+      "correct_answer": "General Data Protection Regulation",
+      "explanation": "GDPR stands for General Data Protection Regulation, which is a regulation in EU law on data protection and privacy."
+    },
+    {
+      "id": 2,
+      "difficulty": "easy",
+      "question": "When did the GDPR come into effect?",
+      "options": [
+        "January 2016",
+        "May 2018",
+        "December 2020",
+        "March 2017"
+      ],
+      "correct_answer": "May 2018",
+      "explanation": "The GDPR was approved in April 2016 but came into full effect on May 25, 2018."
+    },
+    {
+      "id": 3,
+      "difficulty": "easy",
+      "question": "Which of the following is NOT considered personal data under GDPR?",
+      "options": [
+        "Email address",
+        "IP address",
+        "Anonymized statistical data",
+        "Biometric data"
+      ],
+      "correct_answer": "Anonymized statistical data",
+      "explanation": "Properly anonymized statistical data is not considered personal data under GDPR as it cannot be linked back to an identifiable individual."
+    },
+    {
+      "id": 4,
+      "difficulty": "easy",
+      "question": "Which organizations must comply with GDPR?",
+      "options": [
+        "Only organizations based in the EU",
+        "Only large multinational corporations",
+        "Any organization processing EU citizens' data, regardless of location",
+        "Only government organizations"
+      ],
+      "correct_answer": "Any organization processing EU citizens' data, regardless of location",
+      "explanation": "GDPR applies to any organization that processes personal data of individuals in the EU, regardless of where the organization is based."
+    },
+    {
+      "id": 5,
+      "difficulty": "easy",
+      "question": "What is the primary purpose of GDPR?",
+      "options": [
+        "To increase government surveillance capabilities",
+        "To protect individuals' privacy and give them control over their personal data",
+        "To make data collection easier for businesses",
+        "To restrict internet access in the EU"
+      ],
+      "correct_answer": "To protect individuals' privacy and give them control over their personal data",
+      "explanation": "GDPR aims to protect the privacy of EU citizens and give them greater control over how their personal data is collected, processed, and used."
+    },
+    {
+      "id": 6,
+      "difficulty": "medium",
+      "question": "Within what timeframe must a data breach be reported to the supervisory authority under GDPR?",
+      "options": [
+        "14 days",
+        "72 hours",
+        "30 days",
+        "7 days"
+      ],
+      "correct_answer": "72 hours",
+      "explanation": "Under GDPR, organizations must report a data breach to the relevant supervisory authority within 72 hours of becoming aware of it."
+    },
+    {
+      "id": 7,
+      "difficulty": "medium",
+      "question": "What does DPIA stand for in the context of GDPR?",
+      "options": [
+        "Data Protection Impact Assessment",
+        "Digital Privacy Information Act",
+        "Data Processing Implementation Agreement",
+        "Direct Personal Information Access"
+      ],
+      "correct_answer": "Data Protection Impact Assessment",
+      "explanation": "A Data Protection Impact Assessment (DPIA) is a process to help identify and minimize data protection risks in projects that process personal data."
+    },
+    {
+      "id": 8,
+      "difficulty": "medium",
+      "question": "Which of the following is NOT one of the data subject rights under GDPR?",
+      "options": [
+        "Right to access",
+        "Right to be forgotten",
+        "Right to data portability",
+        "Right to unlimited data storage"
+      ],
+      "correct_answer": "Right to unlimited data storage",
+      "explanation": "The 'Right to unlimited data storage' is not a GDPR right. In fact, GDPR promotes data minimization and storage limitation principles."
+    },
+    {
+      "id": 9,
+      "difficulty": "medium",
+      "question": "What is the maximum fine for serious infringements of GDPR?",
+      "options": [
+        "€10 million or 2% of global annual turnover, whichever is higher",
+        "€20 million or 4% of global annual turnover, whichever is higher",
+        "€5 million or 1% of global annual turnover, whichever is higher",
+        "€50 million flat fee"
+      ],
+      "correct_answer": "€20 million or 4% of global annual turnover, whichever is higher",
+      "explanation": "For the most serious infringements, organizations can be fined up to €20 million or 4% of their total global annual turnover, whichever is higher."
+    },
+    {
+      "id": 10,
+      "difficulty": "medium",
+      "question": "Under GDPR, what is the definition of 'consent'?",
+      "options": [
+        "Any form of agreement from the data subject",
+        "Freely given, specific, informed and unambiguous indication of the data subject's wishes",
+        "Implied permission based on continued use of services",
+        "Written authorization signed by the data subject"
+      ],
+      "correct_answer": "Freely given, specific, informed and unambiguous indication of the data subject's wishes",
+      "explanation": "GDPR defines consent as a 'freely given, specific, informed and unambiguous indication of the data subject's wishes' through a clear affirmative action."
+    },
+    {
+      "id": 11,
+      "difficulty": "hard",
+      "question": "Which of the following is NOT a lawful basis for processing personal data under GDPR?",
+      "options": [
+        "Consent",
+        "Legitimate interest",
+        "Commercial advantage",
+        "Legal obligation"
+      ],
+      "correct_answer": "Commercial advantage",
+      "explanation": "Commercial advantage is not one of the six lawful bases for processing personal data under GDPR. The lawful bases are: consent, contract, legal obligation, vital interests, public task, and legitimate interests."
+    },
+    {
+      "id": 12,
+      "difficulty": "hard",
+      "question": "What is the 'one-stop-shop' mechanism in GDPR?",
+      "options": [
+        "A single website where all EU privacy regulations can be found",
+        "A system allowing organizations to deal with a single lead supervisory authority",
+        "A centralized database of all data breaches in the EU",
+        "A unified payment system for GDPR fines"
+      ],
+      "correct_answer": "A system allowing organizations to deal with a single lead supervisory authority",
+      "explanation": "The 'one-stop-shop' mechanism allows organizations operating in multiple EU countries to deal primarily with a single lead supervisory authority in the country of their main establishment."
+    },
+    {
+      "id": 13,
+      "difficulty": "hard",
+      "question": "Under what circumstances can a Data Protection Officer (DPO) be dismissed or penalized for performing their tasks?",
+      "options": [
+        "If they report too many compliance issues",
+        "If the organization decides the role is no longer necessary",
+        "If they fail to prevent a data breach",
+        "A DPO cannot be dismissed or penalized for performing their tasks"
+      ],
+      "correct_answer": "A DPO cannot be dismissed or penalized for performing their tasks",
+      "explanation": "Under GDPR, a Data Protection Officer has protected status and cannot be dismissed or penalized for performing their tasks. This ensures their independence."
+    },
+    {
+      "id": 14,
+      "difficulty": "hard",
+      "question": "What is a 'joint controller' under GDPR?",
+      "options": [
+        "Two separate companies that have merged their data protection departments",
+        "Two or more controllers who jointly determine the purposes and means of processing",
+        "A controller who operates in two or more EU member states",
+        "A backup data controller who takes over in case of emergency"
+      ],
+      "correct_answer": "Two or more controllers who jointly determine the purposes and means of processing",
+      "explanation": "Joint controllers are two or more controllers who jointly determine the purposes and means of processing personal data. They must have a transparent arrangement defining their respective responsibilities."
+    },
+    {
+      "id": 15,
+      "difficulty": "hard",
+      "question": "What special category of personal data requires explicit consent under GDPR?",
+      "options": [
+        "Email addresses",
+        "Genetic data",
+        "Professional contact information",
+        "Customer purchase history"
+      ],
+      "correct_answer": "Genetic data",
+      "explanation": "Genetic data is considered a special category of personal data under GDPR, along with other sensitive data like health data, biometric data, and data revealing racial or ethnic origin, which generally requires explicit consent for processing."
+    }
+  ]
+}
