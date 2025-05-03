@@ -55,7 +55,15 @@ exclude:
   - README.md
   - CNAME
 
-# Blog
+# Translations
 date_label:
   en: "Written on"
   it: "Scritto il"
+
+follow_label:
+  en: "Follow Us on"
+  it: "Seguici su"
+  
+got_notify_label:
+  en: "You got 1 Invite!"
+  it: "Hai ricevuto 1 Invito!"
