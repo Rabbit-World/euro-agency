@@ -2,7 +2,7 @@
 layout: page
 title: Servizi
 lang: it
-ref: servizi
+ref: services
 permalink: /it/servizi
 order: 3
 ---
