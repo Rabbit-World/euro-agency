@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Example Homepage
+title: Home
 description: This is an example for a "hero" homepage
 lang: en
 ref: homepage
