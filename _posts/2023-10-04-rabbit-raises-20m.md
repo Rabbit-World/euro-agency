@@ -63,7 +63,6 @@ We hope that this is the beginning of an incredible journey, where lifelong and 
 
 Please apply on our careers page, and we are happy to take other inquiries through info@rabbit.tech.
 
-
-
+<hr>
 
 Read from the <a href="https://www.rabbit.tech/newsroom/rabbit-raises-20m" target="_blank"><span class="underline-anchor">source<span class="underline moving-underline"></span></span></a>
