@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Home EN
+title: Home
 description: Questo è un esempio di homepage con utilizzo del componente "hero"
 lang: en
 ref: homepage
