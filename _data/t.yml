@@ -23,8 +23,8 @@ author:
 ## Social
 social-links:
   en:
-          x:
-      name: "x"
+    twitter:
+      name: "twitter"
       url: "https://x.com/AssistedProfile"
     github:
       name: "github"
@@ -39,8 +39,8 @@ social-links:
       name: "whatsapp"
       url: "https://wa.me/"
   it:
-          x:
-      name: "x"
+    twitter:
+      name: "twitter"
       url: "https://x.com/AssistedProfile"
     github:
       name: "github"
