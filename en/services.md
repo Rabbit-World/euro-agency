@@ -3,7 +3,7 @@ layout: page
 title: Services
 lang: en
 ref: services
-permalink: /services
+permalink: /work-in-progress
 order: 3
 ---
 
