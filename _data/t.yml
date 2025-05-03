@@ -89,8 +89,3 @@ footer-links:
     cookie-policy:
       name: "Informativa sui Cookie"
       url: "/it/cookie-policy"
-
-date_label:
-  en: "Written on"
-  it: "Scritto il"
-
