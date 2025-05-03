@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Nasce Rabbit World!
-lang: it, en
+lang: it en
 ref: hello-rabbit-world
 categories: [rabbit-world]
 tags: [rabbit, hosting, tech]
