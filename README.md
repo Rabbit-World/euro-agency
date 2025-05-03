@@ -1,7 +1,7 @@
 # Design Jekyll Theme
 
 A Jekyll theme based on the [UI Kit](https://github.com/italia/design-ui-kit)
-and built with [Bootstrap Italia](https://github.com/italia/bootstrap-italia/).
+and built with [Bootstrap Italia](https://github.com/italia/bootstrap-world/).
 
 ## Getting started
 
