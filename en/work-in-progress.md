@@ -11,7 +11,7 @@ permalink: /work-in-progress.html
 </p>
 
 <p style="text-align: center;">
-  <img src="../assets/images/rabbit-hole.gif" alt="Under Construction" style="max-width: 100%; height: auto;">
+  <img src="https://rabbit-world.github.io/euro-agency/assets/images/rabbit-hole.gif" alt="Under Construction" style="max-width: 100%; height: auto;">
 </p>
 
 [Back to homepage]({{ site.baseurl }}/)
