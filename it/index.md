@@ -2,9 +2,9 @@
 layout: default
 title: Home
 description: Questo è un esempio di homepage con utilizzo del componente "hero"
-lang: en
+lang: it
 ref: homepage
-permalink: /
+permalink: /it/
 order: 1
 ---
 
