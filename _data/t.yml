@@ -35,6 +35,9 @@ social-links:
     youtube:
       name: "youtube"
       url: "https://www.youtube.com/@Assisted-World"
+    whatsapp:
+      name: "whatsapp"
+      url: "https://wa.me/"
   it:
     twitter:
       name: "twitter"
@@ -48,6 +51,9 @@ social-links:
     youtube:
       name: "youtube"
       url: "https://www.youtube.com/@Assisted-World"
+    whatsapp:
+      name: "whatsapp"
+      url: "https://wa.me/"
 
 ## Labels
 italian-version:
