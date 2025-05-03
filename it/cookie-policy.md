@@ -7,8 +7,6 @@ ref: cookie-policy
 permalink: /it/cookie-policy
 ---
 
-# Informativa sui Cookie  
-
 **Data di entrata in vigore:** [Inserisci Data]  
 **Ultimo aggiornamento:** [Inserisci Data]  
 
