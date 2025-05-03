@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GDPR Knowledge Challenge</title>
+    <link rel="stylesheet" href="styles.css">
+    <meta name="description" content="Test your knowledge of the General Data Protection Regulation (GDPR) with this educational game">
+</head>
+<body>
+    <!-- GDPR Consent Banner -->
+    <div id="gdpr-consent" class="gdpr-banner" role="dialog" aria-labelledby="gdpr-title">
+        <h2 id="gdpr-title">Cookie & Privacy Settings</h2>
+        <p>This game uses cookies to store your progress and preferences. We also collect anonymous usage data to improve the game experience.</p>
+        <p>As this is an educational game about GDPR, we want to demonstrate best practices in data protection and privacy.</p>
+        <div class="consent-controls">
+            <button id="accept-all" class="btn btn-primary">Accept All</button>
+            <button id="accept-necessary" class="btn btn-secondary">Accept Only Necessary</button>
+            <button id="customize-settings" class="btn btn-tertiary">Customize Settings</button>
+        </div>
+        <p><small>You can learn more about how we handle your data in our <a href="privacy-policy.html">Privacy Policy</a>.</small></p>
+    </div>
+
+    <!-- Main Game Container -->
+    <main id="game-container">
+        <!-- Welcome Screen -->
+        <section id="welcome-screen" class="game-screen active" aria-labelledby="game-title">
+            <div class="content-wrapper">
+                <h1 id="game-title">GDPR Knowledge Challenge</h1>
+                <p class="intro-text">Test your knowledge of the General Data Protection Regulation (GDPR) with these questions covering key concepts, rights, and compliance requirements.</p>
+                
+                <form id="player-form">
+                    <div class="form-group">
+                        <label for="player-name">Your Name:</label>
+                        <input type="text" id="player-name" name="player-name" required aria-required="true">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="country-select">Select Your Country:</label>
+                        <select id="country-select" name="country" required aria-required="true">
+                            <option value="" disabled selected>-- Select a country --</option>
+                            <optgroup label="EU Countries">
+                                <option value="AT">Austria</option>
+                                <option value="BE">Belgium</option>
+                                <option value="BG">Bulgaria</option>
+                                <option value="HR">Croatia</option>
+                                <option value="CY">Cyprus</option>
+                                <option value="CZ">Czech Republic (Czechia)</option>
+                                <option value="DK">Denmark</option>
+                                <option value="EE">Estonia</option>
+                                <option value="FI">Finland</option>
+                                <option value="FR">France</option>
+                                <option value="DE">Germany</option>
+                                <option value="GR">Greece</option>
+                                <option value="HU">Hungary</option>
+                                <option value="IE">Ireland</option>
+                                <option value="IT">Italy</option>
+                                <option value="LV">Latvia</option>
+                                <option value="LT">Lithuania</option>
+                                <option value="LU">Luxembourg</option>
+                                <option value="MT">Malta</option>
+                                <option value="NL">Netherlands</option>
+                                <option value="PL">Poland</option>
+                                <option value="PT">Portugal</option>
+                                <option value="RO">Romania</option>
+                                <option value="SK">Slovakia</option>
+                                <option value="SI">Slovenia</option>
+                                <option value="ES">Spain</option>
+                                <option value="SE">Sweden</option>
+                            </optgroup>
+                            <optgroup label="Non-EU">
+                                <option value="non-eu">Other (Non-EU)</option>
+                            </optgroup>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="difficulty-select">Difficulty Level:</label>
+                        <select id="difficulty-select" name="difficulty">
+                            <option value="easy">Easy</option>
+                            <option value="medium">Medium</option>
+                            <option value="hard">Hard</option>
+                            <option value="mixed" selected>Mixed</option>
+                        </select>
+                    </div>
+                    
+                    <button type="submit" id="start-game" class="btn btn-primary">Start Game</button>
+                </form>
+            </div>
+        </section>
+
+        <!-- Quiz Interface -->
+        <section id="quiz-screen" class="game-screen" aria-labelledby="question-title">
+            <div class="quiz-header">
+                <div class="quiz-progress" aria-label="Quiz progress">
+                    <span id="current-question">1</span> of <span id="total-questions">5</span>
+                </div>
+                <div class="quiz-score">
+                    Score: <span id="current-score">0</span>
+                </div>
+                <div class="quiz-timer" aria-label="Time remaining">
+                    <span id="timer-value">30</span>s
+                </div>
+            </div>
+            
+            <div class="question-container">
+                <h2 id="question-title" class="question-text"></h2>
+                <div id="options-container" class="options-container">
+                    <!-- Answer options will be dynamically inserted here -->
+                </div>
+            </div>
+            
+            <div id="feedback-container" class="feedback-container" aria-live="polite">
+                <!-- Feedback will be shown here after answering -->
+            </div>
+            
+            <div class="quiz-controls">
+                <button id="next-question" class="btn btn-primary" disabled>Next Question</button>
+            </div>
+        </section>
+
+        <!-- Results Screen -->
+        <section id="results-screen" class="game-screen" aria-labelledby="results-title">
+            <h2 id="results-title">Your Results</h2>
+            
+            <div class="results-summary">
+                <p>Final Score: <span id="final-score">0</span> out of <span id="max-score">5</span></p>
+                <p>Time Taken: <span id="time-taken">0</span> seconds</p>
+                <div id="performance-message"></div>
+            </div>
+            
+            <div class="leaderboards-container">
+                <div class="leaderboard eu-leaderboard">
+                    <h3>EU Leaderboard</h3>
+                    <div class="leaderboard-chart" id="eu-chart">
+                        <!-- EU leaderboard chart will be rendered here -->
+                    </div>
+                    <div class="rankings-filter">
+                        <label for="eu-filter">Filter by:</label>
+                        <select id="eu-filter" class="filter-select">
+                            <option value="all" selected>All Difficulties</option>
+                            <option value="easy">Easy</option>
+                            <option value="medium">Medium</option>
+                            <option value="hard">Hard</option>
+                            <option value="mixed">Mixed</option>
+                        </select>
+                    </div>
+                    <ul id="eu-rankings" class="rankings-list" aria-label="EU Rankings">
+                        <!-- EU rankings will be dynamically inserted here -->
+                    </ul>
+                </div>
+                
+                <div class="leaderboard global-leaderboard">
+                    <h3>Global Leaderboard</h3>
+                    <div class="leaderboard-chart" id="global-chart">
+                        <!-- Global leaderboard chart will be rendered here -->
+                    </div>
+                    <div class="rankings-filter">
+                        <label for="global-filter">Filter by:</label>
+                        <select id="global-filter" class="filter-select">
+                            <option value="all" selected>All Difficulties</option>
+                            <option value="easy">Easy</option>
+                            <option value="medium">Medium</option>
+                            <option value="hard">Hard</option>
+                            <option value="mixed">Mixed</option>
+                        </select>
+                    </div>
+                    <ul id="global-rankings" class="rankings-list" aria-label="Global Rankings">
+                        <!-- Global rankings will be dynamically inserted here -->
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="results-controls">
+                <button id="play-again" class="btn btn-primary">Play Again</button>
+                <button id="share-results" class="btn btn-secondary">Share Results</button>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 GDPR Knowledge Challenge | <a href="privacy-policy.html" id="privacy-policy">Privacy Policy</a> | <a href="#" id="accessibility-statement">Accessibility Statement</a></p>
+    </footer>
+
+    <!-- Load scripts -->
+    <script src="consent.js"></script>
+    <script src="game.js"></script>
+    <script src="rankings.js"></script>
+    <script src="test_rankings.js"></script>
+</body>
+</html>
