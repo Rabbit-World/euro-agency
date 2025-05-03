@@ -38,6 +38,9 @@ social-links:
     whatsapp:
       name: "whatsapp"
       url: "https://wa.me/"
+    rss:
+      name: "rss"
+      url: "https://rabbit-world.github.io/euro-agency/feed.xml"
   it:
     twitter:
       name: "twitter"
@@ -54,6 +57,9 @@ social-links:
     whatsapp:
       name: "whatsapp"
       url: "https://wa.me/"
+    rss:
+      name: "rss"
+      url: "https://rabbit-world.github.io/euro-agency/feed.xml"
 
 ## Labels
 italian-version:
