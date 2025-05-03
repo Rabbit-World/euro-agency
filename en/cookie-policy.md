@@ -7,8 +7,6 @@ ref: cookie-policy
 permalink: /cookie-policy
 ---
 
-# Cookie Policy
-
 **Effective Date:** [Insert Date]  
 **Last Updated:** [Insert Date]  
 
