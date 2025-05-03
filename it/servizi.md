@@ -3,7 +3,7 @@ layout: page
 title: Servizi
 lang: it
 ref: under-construction
-permalink: /servizi
+permalink: /it/servizi
 order: 3
 ---
 
