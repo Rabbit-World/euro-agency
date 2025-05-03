@@ -3,7 +3,7 @@ layout: page
 title: Servizi
 lang: it
 ref: servizi
-permalink: /it/lavori-in-corso
+permalink: /it/servizi
 order: 3
 ---
 
