@@ -54,3 +54,8 @@ exclude:
   - LICENSE
   - README.md
   - CNAME
+
+# Blog
+date_label:
+  en: "Written on"
+  it: "Scritto il"
