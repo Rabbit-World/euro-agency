@@ -1,4 +1,4 @@
-# Design Jekyll Theme
+# RABBIT WORLD - Euro Agency
 
 A Jekyll theme based on the [UI Kit](https://github.com/italia/design-ui-kit)
 and built with [Bootstrap Italia](https://github.com/italia/bootstrap-italia/).
