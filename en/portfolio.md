@@ -3,7 +3,7 @@ layout: page
 title: Portfolio
 lang: en
 ref: portfolio
-permalink: /portfolio
+permalink: /work-in-progress
 order: 5
 ---
 
