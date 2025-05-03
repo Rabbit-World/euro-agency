@@ -7,8 +7,6 @@ ref: privacy-policy
 permalink: /privacy-policy
 ---
 
-# Privacy Policy
-
 **Effective Date:** [Insert Date]  
 **Last Updated:** [Insert Date]  
 
