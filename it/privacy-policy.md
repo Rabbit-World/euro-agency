@@ -1,13 +1,11 @@
 ---
 layout: page
-title: Privacy Policy
+title: Informativa sulla Privacy
 description:
 lang: it
 ref: privacy-policy
 permalink: /it/privacy-policy
 ---
-
-# Informativa sulla Privacy
 
 **Data di entrata in vigore:** [Inserisci Data]  
 **Ultimo aggiornamento:** [Inserisci Data]  
