@@ -2,8 +2,8 @@
 layout: page
 title: Oops!
 lang: it
-ref: in-costruzione
-permalink: /it/lavori-in-corso
+ref: under-construction
+permalink: /it/lavori-in-corso.html
 ---
 
 <p style="text-align: center; font-weight: bold; font-size: 24px;">
