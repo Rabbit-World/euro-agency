@@ -3,7 +3,7 @@ layout: page
 title: Projects
 lang: en
 ref: projects
-permalink: /projects
+permalink: /work-in-progress
 order: 4
 ---
 
