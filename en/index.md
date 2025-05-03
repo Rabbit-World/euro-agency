@@ -4,7 +4,7 @@ title: Home
 description: This is an example for a "hero" homepage
 lang: en
 ref: homepage
-permalink: /en/
+permalink: /
 order: 1
 ---
 
