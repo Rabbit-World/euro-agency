@@ -1,8 +1,8 @@
 ---
 layout: post
 title: Nuovo Post
-categories: [categoria2]
-tags: [tag1, tag2]
+categories: [rabbit-tech]
+tags: [rabbit, tech]
 lang: it
 ref: new
 ---
