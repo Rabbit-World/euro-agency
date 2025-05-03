@@ -1,8 +1,6 @@
 ---
 ## Main icon
-icon: 
-  en: "/assets/images/logo-world-en.png"
-  it: "/assets/images/logo-world-it.png"
+icon: "/assets/images/logo-world-it.png"
 
 ## Social Card [1200x630]
 social-card: /assets/images/favicons/social-card.png
