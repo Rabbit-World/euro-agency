@@ -11,7 +11,7 @@ permalink: /it/lavori-in-corso.html
 </p>
 
 <p style="text-align: center;">
-  <img src="assets/images/rabbit-hole.gif" alt="In costruzione" style="max-width: 100%; height: auto;">
+  <img src="../assets/images/rabbit-hole.gif" alt="In costruzione" style="max-width: 100%; height: auto;">
 </p>
 
 [Torna alla homepage]({{ site.baseurl }}/)
