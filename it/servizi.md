@@ -2,8 +2,8 @@
 layout: page
 title: Servizi
 lang: it
-ref: under-construction
-permalink: /it/servizi
+ref: servizi
+permalink: /it/lavori-in-corso
 order: 3
 ---
 
