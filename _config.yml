@@ -67,3 +67,7 @@ follow_label:
 got_notify_label:
   en: "You got 1 Invite!"
   it: "Hai ricevuto 1 Invito!"
+  
+rabbit_world:
+  en: "Rabbit World"
+  it: "Rabbit World"
