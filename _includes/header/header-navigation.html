@@ -23,7 +23,7 @@ tutte le pagine del sito che:
             </div>
             <div class="it-right-zone">
               <div class="it-socials d-none d-md-flex">
-                <span>Seguici su</span>
+                <span>{{ site.follow_label[page.lang] }}</span>
                 <ul>
                   {% for social-link in site.data.t.social-links[page.lang] %}
                   <li class="list-inline-item">
