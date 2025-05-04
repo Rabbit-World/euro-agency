@@ -71,3 +71,7 @@ got_notify_label:
 rabbit_world:
   en: "Rabbit World"
   it: "Rabbit World"
+  
+countries_label:
+  en: "Other Countries"
+  it: "Altri Peasi"
