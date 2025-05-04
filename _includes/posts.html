@@ -18,7 +18,7 @@
             <div class="card-text">{{ post.excerpt }}</div>
             <span class="card-signature">{{ post.author }}</span>
             <a class="read-more" href="{{ site.baseurl }}{{ post.url }}">
-              <span class="text">Leggi di più</span>
+              <span class="text">{{ site.read_label[page.lang] }}</span>
               <svg class="icon">
                 <use xlink:href="{{ site.baseurl }}/assets/bootstrap-italia/dist/svg/sprite.svg#it-arrow-right"></use>
               </svg>
