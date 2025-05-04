@@ -1,0 +1,223 @@
+# Levels Configuration
+# This file defines the level system for the gamification architecture
+
+levels:
+  - id: 1
+    name:
+      en: "Novice"
+      it: "Principiante"
+    points_required: 0
+    icon: "level-1.svg"
+    description:
+      en: "You're taking your first steps in exploring our content."
+      it: "Stai muovendo i primi passi nell'esplorazione dei nostri contenuti."
+    rewards:
+      - type: "access"
+        value: "basic"
+        description:
+          en: "Basic access to site content"
+          it: "Accesso base ai contenuti del sito"
+          
+  - id: 2
+    name:
+      en: "Explorer"
+      it: "Esploratore"
+    points_required: 100
+    icon: "level-2.svg"
+    description:
+      en: "You're actively exploring our content and starting to engage."
+      it: "Stai esplorando attivamente i nostri contenuti e iniziando a interagire."
+    rewards:
+      - type: "access"
+        value: "basic_challenges"
+        description:
+          en: "Unlock basic challenges"
+          it: "Sblocca sfide di base"
+      - type: "badge_discount"
+        value: 5
+        description:
+          en: "5% discount on badge requirements"
+          it: "5% di sconto sui requisiti dei badge"
+          
+  - id: 3
+    name:
+      en: "Enthusiast"
+      it: "Entusiasta"
+    points_required: 300
+    icon: "level-3.svg"
+    description:
+      en: "Your enthusiasm for our content is growing stronger."
+      it: "Il tuo entusiasmo per i nostri contenuti sta crescendo."
+    rewards:
+      - type: "access"
+        value: "intermediate_challenges"
+        description:
+          en: "Unlock intermediate challenges"
+          it: "Sblocca sfide intermedie"
+      - type: "badge_discount"
+        value: 10
+        description:
+          en: "10% discount on badge requirements"
+          it: "10% di sconto sui requisiti dei badge"
+      - type: "points_multiplier"
+        value: 1.1
+        description:
+          en: "10% bonus points on all activities"
+          it: "10% di punti bonus su tutte le attività"
+          
+  - id: 4
+    name:
+      en: "Expert"
+      it: "Esperto"
+    points_required: 600
+    icon: "level-4.svg"
+    description:
+      en: "You've developed expertise in navigating and using our content."
+      it: "Hai sviluppato competenza nella navigazione e nell'utilizzo dei nostri contenuti."
+    rewards:
+      - type: "access"
+        value: "advanced_challenges"
+        description:
+          en: "Unlock advanced challenges"
+          it: "Sblocca sfide avanzate"
+      - type: "badge_discount"
+        value: 15
+        description:
+          en: "15% discount on badge requirements"
+          it: "15% di sconto sui requisiti dei badge"
+      - type: "points_multiplier"
+        value: 1.2
+        description:
+          en: "20% bonus points on all activities"
+          it: "20% di punti bonus su tutte le attività"
+          
+  - id: 5
+    name:
+      en: "Master"
+      it: "Maestro"
+    points_required: 1000
+    icon: "level-5.svg"
+    description:
+      en: "You've mastered our content and are a valuable community member."
+      it: "Hai padroneggiato i nostri contenuti e sei un prezioso membro della comunità."
+    rewards:
+      - type: "access"
+        value: "expert_challenges"
+        description:
+          en: "Unlock expert challenges"
+          it: "Sblocca sfide da esperto"
+      - type: "badge_discount"
+        value: 20
+        description:
+          en: "20% discount on badge requirements"
+          it: "20% di sconto sui requisiti dei badge"
+      - type: "points_multiplier"
+        value: 1.3
+        description:
+          en: "30% bonus points on all activities"
+          it: "30% di punti bonus su tutte le attività"
+      - type: "special_content"
+        value: true
+        description:
+          en: "Access to special content"
+          it: "Accesso a contenuti speciali"
+          
+  - id: 6
+    name:
+      en: "Guru"
+      it: "Guru"
+    points_required: 1500
+    icon: "level-6.svg"
+    description:
+      en: "Your expertise and dedication make you a guru in our community."
+      it: "La tua competenza e dedizione ti rendono un guru nella nostra comunità."
+    rewards:
+      - type: "access"
+        value: "all_content"
+        description:
+          en: "Full access to all content"
+          it: "Accesso completo a tutti i contenuti"
+      - type: "badge_discount"
+        value: 25
+        description:
+          en: "25% discount on badge requirements"
+          it: "25% di sconto sui requisiti dei badge"
+      - type: "points_multiplier"
+        value: 1.4
+        description:
+          en: "40% bonus points on all activities"
+          it: "40% di punti bonus su tutte le attività"
+      - type: "special_content"
+        value: true
+        description:
+          en: "Access to special content"
+          it: "Accesso a contenuti speciali"
+      - type: "recognition"
+        value: "guru_badge"
+        description:
+          en: "Special Guru recognition badge"
+          it: "Badge speciale di riconoscimento Guru"
+          
+  - id: 7
+    name:
+      en: "Legend"
+      it: "Leggenda"
+    points_required: 2500
+    icon: "level-7.svg"
+    description:
+      en: "Your legendary status in our community is recognized by all."
+      it: "Il tuo status leggendario nella nostra comunità è riconosciuto da tutti."
+    rewards:
+      - type: "access"
+        value: "all_content"
+        description:
+          en: "Full access to all content"
+          it: "Accesso completo a tutti i contenuti"
+      - type: "badge_discount"
+        value: 30
+        description:
+          en: "30% discount on badge requirements"
+          it: "30% di sconto sui requisiti dei badge"
+      - type: "points_multiplier"
+        value: 1.5
+        description:
+          en: "50% bonus points on all activities"
+          it: "50% di punti bonus su tutte le attività"
+      - type: "special_content"
+        value: true
+        description:
+          en: "Access to special content"
+          it: "Accesso a contenuti speciali"
+      - type: "recognition"
+        value: "legend_badge"
+        description:
+          en: "Special Legend recognition badge"
+          it: "Badge speciale di riconoscimento Leggenda"
+      - type: "community_role"
+        value: "mentor"
+        description:
+          en: "Community mentor role"
+          it: "Ruolo di mentore della comunità"
+
+# Level progression settings
+settings:
+  points_decay:
+    enabled: false
+    rate: 0
+    minimum_level: 3
+    description:
+      en: "Points decay feature is currently disabled"
+      it: "La funzione di decadimento punti è attualmente disabilitata"
+      
+  level_notifications:
+    enabled: true
+    display_time: 5000
+    
+  progression_display:
+    show_next_level: true
+    show_points_needed: true
+    show_percentage: true
+    
+  rewards_notification:
+    enabled: true
+    display_time: 7000

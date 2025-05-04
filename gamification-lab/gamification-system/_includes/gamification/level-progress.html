@@ -1,0 +1,122 @@
+{% comment %}
+Level Progress Component
+This component displays the user's current level and progress toward the next level.
+It can be included in any page where level progress display is needed.
+
+Usage:
+{% include gamification/level-progress.html %}
+{% include gamification/level-progress.html compact=true %}
+{% include gamification/level-progress.html show_rewards=true %}
+
+Parameters:
+- compact: Optional. If true, displays a more compact version of the progress bar. Default is false.
+- show_rewards: Optional. If true, displays rewards for the next level. Default is false.
+- show_points: Optional. If true, displays current points. Default is true.
+{% endcomment %}
+
+{% assign compact = include.compact | default: false %}
+{% assign show_rewards = include.show_rewards | default: false %}
+{% assign show_points = include.show_points | default: true %}
+
+{% assign user_points = site.gamedata.user.points | default: 0 %}
+{% assign current_level = 1 %}
+{% assign next_level = 2 %}
+{% assign current_threshold = 0 %}
+{% assign next_threshold = 100 %}
+{% assign progress_percentage = 0 %}
+
+{% comment %}
+Determine the user's current level and next level based on points
+{% endcomment %}
+{% for level in site.data.levels.levels %}
+  {% if user_points >= level.threshold %}
+    {% assign current_level = level.level %}
+    {% assign current_level_name = level.name %}
+    {% assign current_threshold = level.threshold %}
+    {% assign current_rewards = level.rewards %}
+  {% endif %}
+{% endfor %}
+
+{% comment %}
+Find the next level information
+{% endcomment %}
+{% for level in site.data.levels.levels %}
+  {% if level.level == current_level | plus: 1 %}
+    {% assign next_level = level.level %}
+    {% assign next_level_name = level.name %}
+    {% assign next_threshold = level.threshold %}
+    {% assign next_rewards = level.rewards %}
+    {% break %}
+  {% endif %}
+{% endfor %}
+
+{% comment %}
+Calculate progress percentage to next level
+{% endcomment %}
+{% assign level_points_required = next_threshold | minus: current_threshold %}
+{% assign user_level_points = user_points | minus: current_threshold %}
+{% if level_points_required > 0 %}
+  {% assign progress_percentage = user_level_points | times: 100 | divided_by: level_points_required %}
+{% else %}
+  {% assign progress_percentage = 100 %}
+{% endif %}
+
+{% comment %}
+Ensure progress percentage is between 0 and 100
+{% endcomment %}
+{% if progress_percentage < 0 %}
+  {% assign progress_percentage = 0 %}
+{% endif %}
+{% if progress_percentage > 100 %}
+  {% assign progress_percentage = 100 %}
+{% endif %}
+
+<div class="gamification-level-progress {% if compact %}compact{% endif %}">
+  {% if compact == false %}
+    <div class="level-header">
+      <h3 class="current-level">Level {{ current_level }}: {{ current_level_name }}</h3>
+      {% if show_points %}
+        <div class="points-display">
+          <span class="points-value">{{ user_points }}</span> points
+        </div>
+      {% endif %}
+    </div>
+  {% endif %}
+  
+  <div class="progress-container">
+    <div class="progress-bar">
+      <div class="progress-fill" style="width: {{ progress_percentage }}%"></div>
+    </div>
+    
+    <div class="progress-labels">
+      {% if compact %}
+        <span class="level-label">Lvl {{ current_level }}</span>
+        <span class="progress-percentage">{{ progress_percentage }}%</span>
+        <span class="level-label">Lvl {{ next_level }}</span>
+      {% else %}
+        <div class="progress-details">
+          <span class="points-progress">{{ user_level_points }} / {{ level_points_required }} points to next level</span>
+          <span class="progress-percentage">{{ progress_percentage }}%</span>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+  
+  {% if compact == false %}
+    <div class="next-level-info">
+      <h4>Next Level: {{ next_level }} - {{ next_level_name }}</h4>
+      <p class="points-needed">{{ next_threshold | minus: user_points }} more points needed</p>
+      
+      {% if show_rewards %}
+        <div class="rewards-preview">
+          <h5>Rewards Unlocked at Level {{ next_level }}:</h5>
+          <ul class="rewards-list">
+            {% for reward in next_rewards %}
+              <li>{{ reward }}</li>
+            {% endfor %}
+          </ul>
+        </div>
+      {% endif %}
+    </div>
+  {% endif %}
+</div>

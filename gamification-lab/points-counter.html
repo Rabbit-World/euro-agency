@@ -1,0 +1,59 @@
+{% comment %}
+  Points Counter Component
+  
+  Parameters:
+  - show_icon: Whether to show the points icon (optional, defaults to true)
+  - show_label: Whether to show the points label (optional, defaults to true)
+  - size: Size of the counter - 'small', 'medium', or 'large' (optional, defaults to 'medium')
+  - position: Position of the counter - 'inline', 'fixed-top', or 'fixed-bottom' (optional, defaults to 'inline')
+{% endcomment %}
+
+{% assign user_points = site.data.user_points | default: 0 %}
+{% assign show_icon = include.show_icon | default: true %}
+{% assign show_label = include.show_label | default: true %}
+{% assign size = include.size | default: "medium" %}
+{% assign position = include.position | default: "inline" %}
+
+<div class="points-counter points-counter-{{ size }} points-counter-{{ position }}" id="points-counter">
+  {% if show_icon %}
+    <span class="points-icon">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+        <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.25-11.25a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm1.5 6.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm-4.5 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm8 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
+      </svg>
+    </span>
+  {% endif %}
+  
+  <span class="points-value" id="points-value">{{ user_points }}</span>
+  
+  {% if show_label %}
+    <span class="points-label">{{ site.data.gamification.points[page.lang] | default: "points" }}</span>
+  {% endif %}
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Listen for points earned events
+    document.addEventListener('gamification:pointsEarned', function(event) {
+      const pointsValueElement = document.getElementById('points-value');
+      
+      if (pointsValueElement && event.detail && event.detail.points) {
+        // Get current points
+        const currentPoints = parseInt(pointsValueElement.textContent);
+        
+        // Calculate new points
+        const newPoints = currentPoints + event.detail.points;
+        
+        // Update display
+        pointsValueElement.textContent = newPoints;
+        
+        // Add animation class
+        pointsValueElement.classList.add('points-added');
+        
+        // Remove animation class after animation completes
+        setTimeout(function() {
+          pointsValueElement.classList.remove('points-added');
+        }, 500);
+      }
+    });
+  });
+</script>

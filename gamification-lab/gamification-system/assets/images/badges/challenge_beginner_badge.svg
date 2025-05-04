@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200">
+  <circle cx="100" cy="100" r="90" fill="#FF9800" />
+  <circle cx="100" cy="100" r="80" fill="#FFB74D" />
+  <circle cx="100" cy="100" r="70" fill="#FFE0B2" />
+  <path d="M75 65 L125 65 L140 100 L125 135 L75 135 L60 100 Z" fill="#E65100" />
+  <text x="100" y="105" font-family="Arial" font-size="24" font-weight="bold" text-anchor="middle" fill="#FFFFFF">!</text>
+  <text x="100" y="180" font-family="Arial" font-size="14" text-anchor="middle" fill="#FFFFFF">CHALLENGE TAKER</text>
+</svg>

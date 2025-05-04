@@ -1,0 +1,123 @@
+---
+layout: default
+---
+
+{% assign challenge_id = page.challenge_id %}
+{% assign challenge = site.data.challenges.challenges[challenge_id] %}
+{% assign user_level = site.data.user_level | default: 1 %}
+{% assign is_locked = challenge.required_level > user_level %}
+{% assign is_completed = site.data.user_challenges[challenge_id].completed | default: false %}
+
+<div class="container my-5">
+  <div class="row">
+    <div class="col-md-8">
+      <div class="challenge-item" data-challenge-id="{{ challenge_id }}">
+        <div class="challenge-header">
+          <h2 class="challenge-title">{{ challenge.name[page.lang] | default: challenge.name.en }}</h2>
+          <div class="challenge-meta">
+            <span class="challenge-difficulty {{ challenge.difficulty }}">{{ challenge.difficulty }}</span>
+            <span class="challenge-points">{{ challenge.points }} {{ site.data.gamification.points[page.lang] | default: "points" }}</span>
+          </div>
+        </div>
+        
+        <div class="challenge-body">
+          <div class="challenge-description">
+            {{ challenge.description[page.lang] | default: challenge.description.en }}
+          </div>
+          
+          {% if is_completed %}
+            <div class="challenge-completion">
+              <h3>{{ site.data.gamification.challenge_completed[page.lang] | default: "Challenge Completed!" }}</h3>
+              <p>{{ site.data.gamification.challenge_completed_message[page.lang] | default: "Congratulations on completing this challenge." }}</p>
+            </div>
+          {% elsif is_locked %}
+            <div class="challenge-locked">
+              <p>{{ site.data.gamification.challenge_locked_message[page.lang] | default: "This challenge requires level" }} {{ challenge.required_level }} {{ site.data.gamification.to_attempt[page.lang] | default: "to attempt." }}</p>
+            </div>
+          {% else %}
+            <div class="challenge-instructions">
+              <h4>{{ site.data.gamification.instructions[page.lang] | default: "Instructions" }}</h4>
+              <p>{{ challenge.instructions[page.lang] | default: challenge.instructions.en }}</p>
+            </div>
+            
+            {% if challenge.time_limit %}
+              <div class="challenge-timer" data-time-limit="{{ challenge.time_limit }}">
+                {{ challenge.time_limit | divided_by: 60 }}:{{ challenge.time_limit | modulo: 60 | prepend: '00' | slice: -2, 2 }}
+              </div>
+            {% endif %}
+            
+            <div class="challenge-content">
+              {{ content }}
+            </div>
+            
+            <div class="challenge-actions">
+              <button class="gamification-button challenge-start">
+                {{ site.data.gamification.start_challenge[page.lang] | default: "Start Challenge" }}
+              </button>
+              <button class="gamification-button challenge-complete">
+                {{ site.data.gamification.complete_challenge[page.lang] | default: "Complete Challenge" }}
+              </button>
+            </div>
+          {% endif %}
+        </div>
+      </div>
+      
+      {% if page.show_related_challenges %}
+        <div class="related-challenges gamification-mt-3">
+          <h3>{{ site.data.gamification.related_challenges[page.lang] | default: "Related Challenges" }}</h3>
+          <div class="row">
+            {% assign related_challenges = site.data.challenges.challenges | where: "category", challenge.category | limit: 3 %}
+            {% for related in related_challenges %}
+              {% if related[0] != challenge_id %}
+                <div class="col-md-4">
+                  <div class="related-challenge-card">
+                    <h4>{{ related[1].name[page.lang] | default: related[1].name.en }}</h4>
+                    <p>{{ related[1].description[page.lang] | default: related[1].description.en | truncate: 100 }}</p>
+                    <a href="{{ site.baseurl }}/{{ page.lang }}/challenges/{{ related[0] }}" class="gamification-button">
+                      {{ site.data.gamification.view_challenge[page.lang] | default: "View Challenge" }}
+                    </a>
+                  </div>
+                </div>
+              {% endif %}
+            {% endfor %}
+          </div>
+        </div>
+      {% endif %}
+    </div>
+    
+    <div class="col-md-4">
+      <div class="challenge-sidebar">
+        {% include gamification/level-progress.html compact=true %}
+        
+        <div class="gamification-container gamification-mt-3">
+          <h3 class="gamification-title">{{ site.data.gamification.category[page.lang] | default: "Category" }}</h3>
+          <p>{{ site.data.challenges.categories[challenge.category].name[page.lang] | default: site.data.challenges.categories[challenge.category].name.en }}</p>
+          <p class="small">{{ site.data.challenges.categories[challenge.category].description[page.lang] | default: site.data.challenges.categories[challenge.category].description.en }}</p>
+        </div>
+        
+        {% if challenge.required_level > 1 %}
+          <div class="gamification-container gamification-mt-3">
+            <h3 class="gamification-title">{{ site.data.gamification.requirements[page.lang] | default: "Requirements" }}</h3>
+            <p>{{ site.data.gamification.minimum_level[page.lang] | default: "Minimum Level" }}: {{ challenge.required_level }}</p>
+          </div>
+        {% endif %}
+        
+        {% if page.show_badges %}
+          <div class="gamification-container gamification-mt-3">
+            <h3 class="gamification-title">{{ site.data.gamification.related_badges[page.lang] | default: "Related Badges" }}</h3>
+            {% include gamification/badge-display.html max_badges=3 %}
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Initialize challenge functionality
+    if (window.GamificationInteractive) {
+      GamificationInteractive.init();
+    }
+  });
+</script>

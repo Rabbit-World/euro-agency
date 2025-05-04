@@ -1,0 +1,299 @@
+---
+layout: default
+---
+{% comment %}
+Challenge Layout
+This layout is used for challenge pages. It provides the structure for displaying
+challenge information, instructions, and interactive elements.
+
+Front Matter Parameters:
+- title: Challenge title
+- description: Challenge description
+- points: Points awarded for completion
+- time_limit: Time limit in seconds (optional)
+- difficulty: Challenge difficulty level
+- category: Challenge category
+- tasks: List of tasks to complete (optional)
+- questions: List of questions to answer (optional)
+{% endcomment %}
+
+<div class="challenge-page">
+  <div class="challenge-header">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <h1 class="challenge-title">{{ page.title }}</h1>
+          
+          <div class="challenge-meta">
+            <span class="challenge-category">{{ page.category | capitalize }}</span>
+            <span class="challenge-difficulty">{{ page.difficulty | capitalize }}</span>
+            <span class="challenge-points">{{ page.points }} points</span>
+            
+            {% if page.time_limit %}
+              <span class="challenge-time-limit">
+                <i class="fa fa-clock-o"></i>
+                {% assign minutes = page.time_limit | divided_by: 60 %}
+                {% if minutes < 60 %}
+                  {{ minutes }} min
+                {% else %}
+                  {% assign hours = minutes | divided_by: 60 %}
+                  {% assign remaining_minutes = minutes | modulo: 60 %}
+                  {{ hours }} hr {% if remaining_minutes > 0 %}{{ remaining_minutes }} min{% endif %}
+                {% endif %}
+              </span>
+            {% endif %}
+          </div>
+          
+          <div class="challenge-description">
+            {{ page.description }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="challenge-content">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          {% if page.time_limit %}
+            <div class="challenge-timer" data-time-limit="{{ page.time_limit }}">
+              <div class="timer-display">
+                <span class="timer-value">00:00:00</span>
+                <span class="timer-label">Time Remaining</span>
+              </div>
+              <div class="timer-progress">
+                <div class="timer-progress-bar"></div>
+              </div>
+            </div>
+          {% endif %}
+          
+          <div class="challenge-instructions">
+            <h2>Instructions</h2>
+            {{ content }}
+          </div>
+          
+          {% if page.tasks %}
+            <div class="challenge-tasks">
+              <h2>Tasks</h2>
+              <div class="task-list">
+                {% for task in page.tasks %}
+                  <div class="task-item" data-task-id="{{ forloop.index }}">
+                    <div class="task-checkbox">
+                      <input type="checkbox" id="task-{{ forloop.index }}" class="task-checkbox-input">
+                      <label for="task-{{ forloop.index }}" class="task-checkbox-label"></label>
+                    </div>
+                    <div class="task-content">
+                      <h3 class="task-title">{{ task.title }}</h3>
+                      <div class="task-description">{{ task.description }}</div>
+                    </div>
+                  </div>
+                {% endfor %}
+              </div>
+            </div>
+          {% endif %}
+          
+          {% if page.questions %}
+            <div class="challenge-quiz">
+              <h2>Questions</h2>
+              <form class="quiz-form">
+                {% for question in page.questions %}
+                  <div class="question-item" data-question-id="{{ forloop.index }}">
+                    <h3 class="question-text">{{ question.text }}</h3>
+                    
+                    {% case question.type %}
+                      {% when 'multiple_choice' %}
+                        <div class="question-options">
+                          {% for option in question.options %}
+                            <div class="option-item">
+                              <input type="radio" name="question-{{ forloop.parentloop.index }}" 
+                                     id="question-{{ forloop.parentloop.index }}-option-{{ forloop.index }}" 
+                                     value="{{ forloop.index }}">
+                              <label for="question-{{ forloop.parentloop.index }}-option-{{ forloop.index }}">
+                                {{ option }}
+                              </label>
+                            </div>
+                          {% endfor %}
+                        </div>
+                      
+                      {% when 'checkbox' %}
+                        <div class="question-options">
+                          {% for option in question.options %}
+                            <div class="option-item">
+                              <input type="checkbox" name="question-{{ forloop.parentloop.index }}[]" 
+                                     id="question-{{ forloop.parentloop.index }}-option-{{ forloop.index }}" 
+                                     value="{{ forloop.index }}">
+                              <label for="question-{{ forloop.parentloop.index }}-option-{{ forloop.index }}">
+                                {{ option }}
+                              </label>
+                            </div>
+                          {% endfor %}
+                        </div>
+                      
+                      {% when 'text' %}
+                        <div class="question-text-input">
+                          <input type="text" name="question-{{ forloop.index }}" 
+                                 placeholder="Your answer">
+                        </div>
+                      
+                      {% when 'textarea' %}
+                        <div class="question-textarea-input">
+                          <textarea name="question-{{ forloop.index }}" 
+                                    placeholder="Your answer" rows="4"></textarea>
+                        </div>
+                    {% endcase %}
+                  </div>
+                {% endfor %}
+              </form>
+            </div>
+          {% endif %}
+          
+          <div class="challenge-actions">
+            <button type="button" class="btn btn-primary btn-lg submit-challenge">Submit Challenge</button>
+            <button type="button" class="btn btn-outline-secondary btn-lg save-progress">Save Progress</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="challenge-completion-modal modal fade" id="challengeCompletionModal" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Challenge Complete!</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="completion-message">
+          <div class="completion-icon">
+            <i class="fa fa-trophy"></i>
+          </div>
+          <h3>Congratulations!</h3>
+          <p>You've successfully completed the <strong class="challenge-name">{{ page.title }}</strong> challenge.</p>
+          
+          <div class="points-earned">
+            <span class="points-value">{{ page.points }}</span>
+            <span class="points-label">Points Earned</span>
+          </div>
+          
+          <div class="completion-stats">
+            <div class="stat-item">
+              <span class="stat-label">Time Taken</span>
+              <span class="stat-value time-taken">--:--:--</span>
+            </div>
+            
+            <div class="stat-item">
+              <span class="stat-label">Score</span>
+              <span class="stat-value score-value">--</span>
+            </div>
+          </div>
+          
+          <div class="badges-earned">
+            <!-- Badges will be dynamically inserted here by JavaScript -->
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <a href="{{ site.baseurl }}/challenges/" class="btn btn-primary">More Challenges</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Initialize challenge timer if present
+    var timerElement = document.querySelector('.challenge-timer');
+    if (timerElement) {
+      var timeLimit = parseInt(timerElement.getAttribute('data-time-limit')) || 0;
+      var timerDisplay = timerElement.querySelector('.timer-value');
+      var timerProgressBar = timerElement.querySelector('.timer-progress-bar');
+      var timeRemaining = timeLimit;
+      var timerInterval;
+      
+      function updateTimer() {
+        if (timeRemaining <= 0) {
+          clearInterval(timerInterval);
+          timeRemaining = 0;
+          // Auto-submit when time runs out
+          document.querySelector('.submit-challenge').click();
+        }
+        
+        var hours = Math.floor(timeRemaining / 3600);
+        var minutes = Math.floor((timeRemaining % 3600) / 60);
+        var seconds = timeRemaining % 60;
+        
+        timerDisplay.textContent = 
+          (hours < 10 ? '0' + hours : hours) + ':' +
+          (minutes < 10 ? '0' + minutes : minutes) + ':' +
+          (seconds < 10 ? '0' + seconds : seconds);
+        
+        var progressPercentage = ((timeLimit - timeRemaining) / timeLimit) * 100;
+        timerProgressBar.style.width = progressPercentage + '%';
+        
+        timeRemaining--;
+      }
+      
+      // Start the timer
+      updateTimer();
+      timerInterval = setInterval(updateTimer, 1000);
+    }
+    
+    // Handle challenge submission
+    var submitButton = document.querySelector('.submit-challenge');
+    if (submitButton) {
+      submitButton.addEventListener('click', function() {
+        // In a real implementation, this would validate answers and submit to the server
+        // For now, we'll just show the completion modal
+        
+        // Calculate time taken (if timer exists)
+        var timeTaken = '';
+        if (timerElement) {
+          var timeElapsed = timeLimit - timeRemaining;
+          var hours = Math.floor(timeElapsed / 3600);
+          var minutes = Math.floor((timeElapsed % 3600) / 60);
+          var seconds = timeElapsed % 60;
+          
+          timeTaken = 
+            (hours < 10 ? '0' + hours : hours) + ':' +
+            (minutes < 10 ? '0' + minutes : minutes) + ':' +
+            (seconds < 10 ? '0' + seconds : seconds);
+            
+          document.querySelector('.time-taken').textContent = timeTaken;
+        }
+        
+        // Show completion modal
+        $('#challengeCompletionModal').modal('show');
+        
+        // In a real implementation, this would update the user's points
+        // For demonstration, we'll just log to console
+        console.log('Challenge completed! Points earned: {{ page.points }}');
+      });
+    }
+    
+    // Handle saving progress
+    var saveButton = document.querySelector('.save-progress');
+    if (saveButton) {
+      saveButton.addEventListener('click', function() {
+        // In a real implementation, this would save the current state to the server
+        console.log('Progress saved!');
+        
+        // Show a temporary message
+        var message = document.createElement('div');
+        message.className = 'alert alert-success save-message';
+        message.textContent = 'Progress saved successfully!';
+        
+        saveButton.parentNode.insertBefore(message, saveButton.nextSibling);
+        
+        setTimeout(function() {
+          message.remove();
+        }, 3000);
+      });
+    }
+  });
+</script>

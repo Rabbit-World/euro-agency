@@ -1,0 +1,592 @@
+# Challenges Configuration
+# This file defines the challenges available in the gamification system
+
+categories:
+  site_exploration:
+    id: "site_exploration"
+    name:
+      en: "Site Exploration"
+      it: "Esplorazione del Sito"
+    description:
+      en: "Challenges related to exploring different parts of the website"
+      it: "Sfide relative all'esplorazione di diverse parti del sito web"
+    icon: "category-exploration.svg"
+    
+  content_engagement:
+    id: "content_engagement"
+    name:
+      en: "Content Engagement"
+      it: "Coinvolgimento nei Contenuti"
+    description:
+      en: "Challenges focused on engaging with site content"
+      it: "Sfide incentrate sul coinvolgimento con i contenuti del sito"
+    icon: "category-engagement.svg"
+    
+  knowledge:
+    id: "knowledge"
+    name:
+      en: "Knowledge"
+      it: "Conoscenza"
+    description:
+      en: "Challenges testing your knowledge about various topics"
+      it: "Sfide che mettono alla prova la tua conoscenza su vari argomenti"
+    icon: "category-knowledge.svg"
+    
+  community:
+    id: "community"
+    name:
+      en: "Community"
+      it: "Comunità"
+    description:
+      en: "Challenges involving community interaction"
+      it: "Sfide che coinvolgono l'interazione con la comunità"
+    icon: "category-community.svg"
+    
+  special:
+    id: "special"
+    name:
+      en: "Special"
+      it: "Speciale"
+    description:
+      en: "Special limited-time challenges"
+      it: "Sfide speciali a tempo limitato"
+    icon: "category-special.svg"
+
+# Challenge definitions
+challenges:
+  # Site Exploration Challenges
+  visit_all_sections:
+    id: "visit_all_sections"
+    category: "site_exploration"
+    name:
+      en: "Section Explorer"
+      it: "Esploratore di Sezioni"
+    description:
+      en: "Visit all main sections of the website"
+      it: "Visita tutte le sezioni principali del sito web"
+    instructions:
+      en: "Navigate to each of the main sections listed in the navigation menu"
+      it: "Naviga in ciascuna delle sezioni principali elencate nel menu di navigazione"
+    difficulty: "easy"
+    points: 50
+    time_limit: null
+    required_level: 1
+    completion_criteria:
+      type: "visit_pages"
+      pages: ["about-us", "services", "projects", "portfolio"]
+      
+  find_easter_egg:
+    id: "find_easter_egg"
+    category: "site_exploration"
+    name:
+      en: "Easter Egg Hunter"
+      it: "Cacciatore di Easter Egg"
+    description:
+      en: "Find the hidden easter egg on the website"
+      it: "Trova l'easter egg nascosto nel sito web"
+    instructions:
+      en: "Look for a hidden interactive element somewhere on the site"
+      it: "Cerca un elemento interattivo nascosto da qualche parte nel sito"
+    difficulty: "medium"
+    points: 100
+    time_limit: null
+    required_level: 2
+    completion_criteria:
+      type: "click_element"
+      element_id: "easter-egg"
+      
+  language_explorer:
+    id: "language_explorer"
+    category: "site_exploration"
+    name:
+      en: "Language Explorer"
+      it: "Esploratore di Lingue"
+    description:
+      en: "View the site in at least 3 different languages"
+      it: "Visualizza il sito in almeno 3 lingue diverse"
+    instructions:
+      en: "Use the language switcher to view the site in different languages"
+      it: "Usa il selettore di lingua per visualizzare il sito in diverse lingue"
+    difficulty: "easy"
+    points: 30
+    time_limit: null
+    required_level: 1
+    completion_criteria:
+      type: "language_switch"
+      count: 3
+      
+  mobile_explorer:
+    id: "mobile_explorer"
+    category: "site_exploration"
+    name:
+      en: "Mobile Explorer"
+      it: "Esploratore Mobile"
+    description:
+      en: "Access the site from a mobile device"
+      it: "Accedi al sito da un dispositivo mobile"
+    instructions:
+      en: "Visit the website using a smartphone or tablet"
+      it: "Visita il sito web utilizzando uno smartphone o un tablet"
+    difficulty: "easy"
+    points: 20
+    time_limit: null
+    required_level: 1
+    completion_criteria:
+      type: "device_type"
+      device: "mobile"
+      
+  night_explorer:
+    id: "night_explorer"
+    category: "site_exploration"
+    name:
+      en: "Night Explorer"
+      it: "Esploratore Notturno"
+    description:
+      en: "Visit the site during night hours (10 PM - 6 AM)"
+      it: "Visita il sito durante le ore notturne (22:00 - 6:00)"
+    instructions:
+      en: "Access the website between 10 PM and 6 AM local time"
+      it: "Accedi al sito web tra le 22:00 e le 6:00 ora locale"
+    difficulty: "medium"
+    points: 40
+    time_limit: null
+    required_level: 1
+    completion_criteria:
+      type: "time_visit"
+      time_range: "22:00-06:00"
+  
+  # Content Engagement Challenges
+  read_articles:
+    id: "read_articles"
+    category: "content_engagement"
+    name:
+      en: "Avid Reader"
+      it: "Lettore Avido"
+    description:
+      en: "Read 5 complete articles"
+      it: "Leggi 5 articoli completi"
+    instructions:
+      en: "Scroll to the bottom of 5 different articles to mark them as read"
+      it: "Scorri fino in fondo a 5 articoli diversi per contrassegnarli come letti"
+    difficulty: "medium"
+    points: 60
+    time_limit: null
+    required_level: 1
+    completion_criteria:
+      type: "read_article"
+      count: 5
+      
+  comment_articles:
+    id: "comment_articles"
+    category: "content_engagement"
+    name:
+      en: "Commentator"
+      it: "Commentatore"
+    description:
+      en: "Leave comments on 3 different articles"
+      it: "Lascia commenti su 3 articoli diversi"
+    instructions:
+      en: "Use the comment section at the bottom of articles to leave meaningful comments"
+      it: "Utilizza la sezione commenti in fondo agli articoli per lasciare commenti significativi"
+    difficulty: "medium"
+    points: 45
+    time_limit: null
+    required_level: 2
+    completion_criteria:
+      type: "comment"
+      count: 3
+      
+  share_content:
+    id: "share_content"
+    category: "content_engagement"
+    name:
+      en: "Content Sharer"
+      it: "Condivisore di Contenuti"
+    description:
+      en: "Share content on social media"
+      it: "Condividi contenuti sui social media"
+    instructions:
+      en: "Use the share buttons to share content on your social media accounts"
+      it: "Utilizza i pulsanti di condivisione per condividere contenuti sui tuoi account social"
+    difficulty: "easy"
+    points: 25
+    time_limit: null
+    required_level: 1
+    completion_criteria:
+      type: "share"
+      count: 1
+      
+  bookmark_content:
+    id: "bookmark_content"
+    category: "content_engagement"
+    name:
+      en: "Bookmarker"
+      it: "Segnalibro"
+    description:
+      en: "Bookmark 5 pieces of content for later reading"
+      it: "Salva 5 contenuti nei segnalibri per la lettura successiva"
+    instructions:
+      en: "Use the bookmark feature to save content for later"
+      it: "Utilizza la funzione segnalibro per salvare i contenuti per dopo"
+    difficulty: "easy"
+    points: 30
+    time_limit: null
+    required_level: 2
+    completion_criteria:
+      type: "bookmark"
+      count: 5
+      
+  feedback_provider:
+    id: "feedback_provider"
+    category: "content_engagement"
+    name:
+      en: "Feedback Provider"
+      it: "Fornitore di Feedback"
+    description:
+      en: "Provide feedback using the feedback form"
+      it: "Fornisci feedback utilizzando il modulo di feedback"
+    instructions:
+      en: "Fill out and submit the feedback form with your suggestions"
+      it: "Compila e invia il modulo di feedback con i tuoi suggerimenti"
+    difficulty: "medium"
+    points: 35
+    time_limit: null
+    required_level: 1
+    completion_criteria:
+      type: "submit_form"
+      form_id: "feedback-form"
+  
+  # Knowledge Challenges
+  beginner_quiz:
+    id: "beginner_quiz"
+    category: "knowledge"
+    name:
+      en: "Beginner's Quiz"
+      it: "Quiz per Principianti"
+    description:
+      en: "Complete the beginner's quiz with at least 70% correct answers"
+      it: "Completa il quiz per principianti con almeno il 70% di risposte corrette"
+    instructions:
+      en: "Answer all questions in the beginner's quiz and submit your answers"
+      it: "Rispondi a tutte le domande nel quiz per principianti e invia le tue risposte"
+    difficulty: "easy"
+    points: 40
+    time_limit: null
+    required_level: 1
+    completion_criteria:
+      type: "quiz_score"
+      quiz_id: "beginner_quiz"
+      min_score: 70
+      
+  intermediate_quiz:
+    id: "intermediate_quiz"
+    category: "knowledge"
+    name:
+      en: "Intermediate Quiz"
+      it: "Quiz Intermedio"
+    description:
+      en: "Complete the intermediate quiz with at least 70% correct answers"
+      it: "Completa il quiz intermedio con almeno il 70% di risposte corrette"
+    instructions:
+      en: "Answer all questions in the intermediate quiz and submit your answers"
+      it: "Rispondi a tutte le domande nel quiz intermedio e invia le tue risposte"
+    difficulty: "medium"
+    points: 60
+    time_limit: null
+    required_level: 3
+    completion_criteria:
+      type: "quiz_score"
+      quiz_id: "intermediate_quiz"
+      min_score: 70
+      
+  advanced_quiz:
+    id: "advanced_quiz"
+    category: "knowledge"
+    name:
+      en: "Advanced Quiz"
+      it: "Quiz Avanzato"
+    description:
+      en: "Complete the advanced quiz with at least 70% correct answers"
+      it: "Completa il quiz avanzato con almeno il 70% di risposte corrette"
+    instructions:
+      en: "Answer all questions in the advanced quiz and submit your answers"
+      it: "Rispondi a tutte le domande nel quiz avanzato e invia le tue risposte"
+    difficulty: "hard"
+    points: 80
+    time_limit: null
+    required_level: 4
+    completion_criteria:
+      type: "quiz_score"
+      quiz_id: "advanced_quiz"
+      min_score: 70
+      
+  timed_quiz:
+    id: "timed_quiz"
+    category: "knowledge"
+    name:
+      en: "Speed Quiz"
+      it: "Quiz Veloce"
+    description:
+      en: "Complete the timed quiz within 2 minutes with at least 60% correct answers"
+      it: "Completa il quiz a tempo entro 2 minuti con almeno il 60% di risposte corrette"
+    instructions:
+      en: "Answer all questions in the timed quiz as quickly as possible"
+      it: "Rispondi a tutte le domande nel quiz a tempo il più velocemente possibile"
+    difficulty: "hard"
+    points: 100
+    time_limit: 120
+    required_level: 3
+    completion_criteria:
+      type: "quiz_score_time"
+      quiz_id: "timed_quiz"
+      min_score: 60
+      max_time: 120
+      
+  perfect_quiz:
+    id: "perfect_quiz"
+    category: "knowledge"
+    name:
+      en: "Perfect Score"
+      it: "Punteggio Perfetto"
+    description:
+      en: "Complete any quiz with a perfect 100% score"
+      it: "Completa qualsiasi quiz con un punteggio perfetto del 100%"
+    instructions:
+      en: "Answer all questions correctly in any quiz"
+      it: "Rispondi correttamente a tutte le domande in qualsiasi quiz"
+    difficulty: "hard"
+    points: 120
+    time_limit: null
+    required_level: 2
+    completion_criteria:
+      type: "quiz_score"
+      quiz_id: "any"
+      min_score: 100
+  
+  # Community Challenges
+  forum_participation:
+    id: "forum_participation"
+    category: "community"
+    name:
+      en: "Forum Participant"
+      it: "Partecipante al Forum"
+    description:
+      en: "Participate in forum discussions by posting at least 3 comments"
+      it: "Partecipa alle discussioni del forum pubblicando almeno 3 commenti"
+    instructions:
+      en: "Visit the forum section and post comments in existing discussions"
+      it: "Visita la sezione forum e pubblica commenti nelle discussioni esistenti"
+    difficulty: "medium"
+    points: 50
+    time_limit: null
+    required_level: 2
+    completion_criteria:
+      type: "forum_posts"
+      count: 3
+      
+  forum_thread:
+    id: "forum_thread"
+    category: "community"
+    name:
+      en: "Discussion Starter"
+      it: "Iniziatore di Discussione"
+    description:
+      en: "Start a new discussion thread in the forum"
+      it: "Avvia un nuovo thread di discussione nel forum"
+    instructions:
+      en: "Create a new discussion topic in the forum section"
+      it: "Crea un nuovo argomento di discussione nella sezione forum"
+    difficulty: "medium"
+    points: 40
+    time_limit: null
+    required_level: 3
+    completion_criteria:
+      type: "create_thread"
+      count: 1
+      
+  refer_friend:
+    id: "refer_friend"
+    category: "community"
+    name:
+      en: "Friend Referral"
+      it: "Invito Amico"
+    description:
+      en: "Refer a friend to the website using the referral system"
+      it: "Invita un amico al sito web utilizzando il sistema di referral"
+    instructions:
+      en: "Use the 'Invite a Friend' feature to send an invitation"
+      it: "Utilizza la funzione 'Invita un Amico' per inviare un invito"
+    difficulty: "medium"
+    points: 60
+    time_limit: null
+    required_level: 2
+    completion_criteria:
+      type: "referral"
+      count: 1
+      
+  profile_completion:
+    id: "profile_completion"
+    category: "community"
+    name:
+      en: "Profile Completer"
+      it: "Completamento Profilo"
+    description:
+      en: "Complete your user profile with all information"
+      it: "Completa il tuo profilo utente con tutte le informazioni"
+    instructions:
+      en: "Fill out all fields in your user profile settings"
+      it: "Compila tutti i campi nelle impostazioni del tuo profilo utente"
+    difficulty: "easy"
+    points: 30
+    time_limit: null
+    required_level: 1
+    completion_criteria:
+      type: "profile_completion"
+      percentage: 100
+      
+  community_event:
+    id: "community_event"
+    category: "community"
+    name:
+      en: "Event Participant"
+      it: "Partecipante all'Evento"
+    description:
+      en: "Participate in a community event"
+      it: "Partecipa a un evento della comunità"
+    instructions:
+      en: "Register for and attend a scheduled community event"
+      it: "Registrati e partecipa a un evento programmato della comunità"
+    difficulty: "medium"
+    points: 70
+    time_limit: null
+    required_level: 2
+    completion_criteria:
+      type: "event_participation"
+      event_id: "any"
+  
+  # Special Challenges
+  daily_login:
+    id: "daily_login"
+    category: "special"
+    name:
+      en: "Daily Visitor"
+      it: "Visitatore Giornaliero"
+    description:
+      en: "Visit the site for 7 consecutive days"
+      it: "Visita il sito per 7 giorni consecutivi"
+    instructions:
+      en: "Log in to the site once per day for 7 consecutive days"
+      it: "Accedi al sito una volta al giorno per 7 giorni consecutivi"
+    difficulty: "medium"
+    points: 75
+    time_limit: null
+    required_level: 1
+    completion_criteria:
+      type: "consecutive_visits"
+      count: 7
+    repeatable: true
+    cooldown: 7
+      
+  seasonal_challenge:
+    id: "seasonal_challenge"
+    category: "special"
+    name:
+      en: "Seasonal Challenge"
+      it: "Sfida Stagionale"
+    description:
+      en: "Complete the current seasonal challenge"
+      it: "Completa la sfida stagionale corrente"
+    instructions:
+      en: "Check the seasonal challenge details and complete the required tasks"
+      it: "Controlla i dettagli della sfida stagionale e completa le attività richieste"
+    difficulty: "medium"
+    points: 100
+    time_limit: null
+    required_level: 2
+    completion_criteria:
+      type: "seasonal"
+      season: "current"
+    repeatable: true
+    cooldown: 90
+      
+  anniversary_challenge:
+    id: "anniversary_challenge"
+    category: "special"
+    name:
+      en: "Anniversary Challenge"
+      it: "Sfida Anniversario"
+    description:
+      en: "Complete the special challenge during the site's anniversary"
+      it: "Completa la sfida speciale durante l'anniversario del sito"
+    instructions:
+      en: "Visit the site during its anniversary and complete the special tasks"
+      it: "Visita il sito durante il suo anniversario e completa le attività speciali"
+    difficulty: "medium"
+    points: 150
+    time_limit: null
+    required_level: 1
+    completion_criteria:
+      type: "date_specific"
+      date: "05-15" # May 15th
+    repeatable: true
+    cooldown: 365
+      
+  weekend_warrior:
+    id: "weekend_warrior"
+    category: "special"
+    name:
+      en: "Weekend Warrior"
+      it: "Guerriero del Weekend"
+    description:
+      en: "Complete 3 challenges during a weekend"
+      it: "Completa 3 sfide durante un weekend"
+    instructions:
+      en: "Complete any 3 challenges between Saturday and Sunday"
+      it: "Completa 3 sfide qualsiasi tra sabato e domenica"
+    difficulty: "medium"
+    points: 80
+    time_limit: null
+    required_level: 2
+    completion_criteria:
+      type: "weekend_activity"
+      count: 3
+    repeatable: true
+    cooldown: 7
+      
+  hidden_challenge:
+    id: "hidden_challenge"
+    category: "special"
+    name:
+      en: "Secret Seeker"
+      it: "Cercatore di Segreti"
+    description:
+      en: "Discover and complete the hidden challenge"
+      it: "Scopri e completa la sfida nascosta"
+    instructions:
+      en: "Find the hidden challenge somewhere on the site and follow its instructions"
+      it: "Trova la sfida nascosta da qualche parte nel sito e segui le sue istruzioni"
+    difficulty: "hard"
+    points: 200
+    time_limit: null
+    required_level: 3
+    completion_criteria:
+      type: "hidden_task"
+      task_id: "secret_task"
+    hidden: true
+
+# Challenge settings
+settings:
+  display:
+    show_completed: true
+    show_locked: true
+    show_progress: true
+    
+  notifications:
+    challenge_available: true
+    challenge_completed: true
+    challenge_expiring: true
+    
+  filters:
+    enable_category_filter: true
+    enable_difficulty_filter: true
+    enable_completion_filter: true

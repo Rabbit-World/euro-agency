@@ -1,0 +1,155 @@
+{% comment %}
+Badge Display Component
+This component displays earned and unearned badges for the current user.
+It can be included in any page where badge display is needed.
+
+Usage:
+{% include gamification/badge-display.html display_type="earned" %}
+{% include gamification/badge-display.html display_type="all" %}
+{% include gamification/badge-display.html display_type="category" category="achievement" %}
+
+Parameters:
+- display_type: "earned" (default), "all", "unearned", or "category"
+- category: Required when display_type is "category". Options: "achievement", "expertise", "engagement", "challenge", "community"
+- limit: Optional. Number of badges to display. Default is all.
+- show_description: Optional. Whether to show badge descriptions. Default is true.
+{% endcomment %}
+
+{% assign display_type = include.display_type | default: "earned" %}
+{% assign limit = include.limit | default: 100 %}
+{% assign show_description = include.show_description | default: true %}
+
+<div class="gamification-badge-display" data-display-type="{{ display_type }}">
+  <div class="badge-container">
+    {% if display_type == "category" and include.category %}
+      <h3 class="badge-section-title">{{ include.category | capitalize }} Badges</h3>
+      
+      {% assign category_badges = site.data.badges[include.category] %}
+      {% for badge in category_badges limit: limit %}
+        {% assign badge_earned = false %}
+        {% if site.gamedata.user.badges contains badge.id %}
+          {% assign badge_earned = true %}
+        {% endif %}
+        
+        <div class="badge-item {% if badge_earned %}earned{% else %}unearned{% endif %}" data-badge-id="{{ badge.id }}">
+          <div class="badge-icon">
+            <img src="{{ site.baseurl }}/assets/images/badges/{{ badge.image }}" alt="{{ badge.name }}" 
+                 class="{% if badge_earned == false %}grayscale{% endif %}">
+          </div>
+          <div class="badge-info">
+            <h4 class="badge-name">{{ badge.name }}</h4>
+            {% if show_description %}
+              <p class="badge-description">{{ badge.description }}</p>
+              <p class="badge-requirement"><strong>Requirement:</strong> {{ badge.requirements }}</p>
+              <p class="badge-points"><strong>Points:</strong> {{ badge.points }}</p>
+            {% endif %}
+          </div>
+        </div>
+      {% endfor %}
+      
+    {% elsif display_type == "earned" %}
+      <h3 class="badge-section-title">Earned Badges</h3>
+      
+      {% assign earned_count = 0 %}
+      {% for category in site.data.badges %}
+        {% assign category_name = category[0] %}
+        {% assign category_badges = category[1] %}
+        
+        {% for badge in category_badges %}
+          {% if site.gamedata.user.badges contains badge.id %}
+            {% assign earned_count = earned_count | plus: 1 %}
+            {% if earned_count <= limit %}
+              <div class="badge-item earned" data-badge-id="{{ badge.id }}">
+                <div class="badge-icon">
+                  <img src="{{ site.baseurl }}/assets/images/badges/{{ badge.image }}" alt="{{ badge.name }}">
+                </div>
+                <div class="badge-info">
+                  <h4 class="badge-name">{{ badge.name }}</h4>
+                  {% if show_description %}
+                    <p class="badge-description">{{ badge.description }}</p>
+                    <p class="badge-requirement"><strong>Requirement:</strong> {{ badge.requirements }}</p>
+                    <p class="badge-points"><strong>Points:</strong> {{ badge.points }}</p>
+                  {% endif %}
+                </div>
+              </div>
+            {% endif %}
+          {% endif %}
+        {% endfor %}
+      {% endfor %}
+      
+      {% if earned_count == 0 %}
+        <p class="no-badges-message">You haven't earned any badges yet. Complete challenges and activities to earn badges!</p>
+      {% endif %}
+      
+    {% elsif display_type == "unearned" %}
+      <h3 class="badge-section-title">Badges to Earn</h3>
+      
+      {% assign unearned_count = 0 %}
+      {% for category in site.data.badges %}
+        {% assign category_name = category[0] %}
+        {% assign category_badges = category[1] %}
+        
+        {% for badge in category_badges %}
+          {% unless site.gamedata.user.badges contains badge.id %}
+            {% assign unearned_count = unearned_count | plus: 1 %}
+            {% if unearned_count <= limit %}
+              <div class="badge-item unearned" data-badge-id="{{ badge.id }}">
+                <div class="badge-icon">
+                  <img src="{{ site.baseurl }}/assets/images/badges/{{ badge.image }}" alt="{{ badge.name }}" class="grayscale">
+                </div>
+                <div class="badge-info">
+                  <h4 class="badge-name">{{ badge.name }}</h4>
+                  {% if show_description %}
+                    <p class="badge-description">{{ badge.description }}</p>
+                    <p class="badge-requirement"><strong>Requirement:</strong> {{ badge.requirements }}</p>
+                    <p class="badge-points"><strong>Points:</strong> {{ badge.points }}</p>
+                  {% endif %}
+                </div>
+              </div>
+            {% endif %}
+          {% endunless %}
+        {% endfor %}
+      {% endfor %}
+      
+    {% else %}
+      <!-- Display all badges -->
+      <h3 class="badge-section-title">All Badges</h3>
+      
+      {% assign all_count = 0 %}
+      {% for category in site.data.badges %}
+        {% assign category_name = category[0] %}
+        {% assign category_badges = category[1] %}
+        
+        <div class="badge-category">
+          <h4 class="category-title">{{ category_name | capitalize }}</h4>
+          <div class="category-badges">
+            {% for badge in category_badges %}
+              {% assign all_count = all_count | plus: 1 %}
+              {% if all_count <= limit %}
+                {% assign badge_earned = false %}
+                {% if site.gamedata.user.badges contains badge.id %}
+                  {% assign badge_earned = true %}
+                {% endif %}
+                
+                <div class="badge-item {% if badge_earned %}earned{% else %}unearned{% endif %}" data-badge-id="{{ badge.id }}">
+                  <div class="badge-icon">
+                    <img src="{{ site.baseurl }}/assets/images/badges/{{ badge.image }}" alt="{{ badge.name }}" 
+                         class="{% if badge_earned == false %}grayscale{% endif %}">
+                  </div>
+                  <div class="badge-info">
+                    <h4 class="badge-name">{{ badge.name }}</h4>
+                    {% if show_description %}
+                      <p class="badge-description">{{ badge.description }}</p>
+                      <p class="badge-requirement"><strong>Requirement:</strong> {{ badge.requirements }}</p>
+                      <p class="badge-points"><strong>Points:</strong> {{ badge.points }}</p>
+                    {% endif %}
+                  </div>
+                </div>
+              {% endif %}
+            {% endfor %}
+          </div>
+        </div>
+      {% endfor %}
+    {% endif %}
+  </div>
+</div>
