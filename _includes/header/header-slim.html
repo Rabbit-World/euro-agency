@@ -3,19 +3,19 @@
     <div class="row">
       <div class="col-12">
         <div class="it-header-slim-wrapper-content">
-          <a class="d-none d-lg-block navbar-brand" href="https://rabbit-world.github.io/" target="_blank">Rabbit World</a>
+          <a class="d-none d-lg-block navbar-brand" href="https://rabbit-world.github.io/" target="_blank">{{ site.rabbit_world[page.lang] }}</a>
           <div class="nav-mobile">
             <nav>
               <a class="it-opener d-lg-none" data-toggle="collapse" href="#menu1" role="button" aria-expanded="false" aria-controls="menu1">
-                <span>Rabbit World</span>
+                <span>{{ site.rabbit_world[page.lang] }}</span>
                 <svg class="icon">
                   <use xlink:href="{{ site.baseurl }}/assets/bootstrap-italia/dist/svg/sprite.svg#it-expand"></use>
                 </svg>
               </a>
               <div class="link-list-wrapper collapse" id="menu1">
                 <ul class="link-list">
-                  <li><a href="https://www.hostinger.com/referral?REFERRALCODE=RABBITWORLD">You got 1 Invite!</a></li>
-                  <li class="d-lg-none"><a href="https://rabbit-world.github.io/" target="_blank">Rabbit World</a></li>
+                  <li><a href="https://www.hostinger.com/referral?REFERRALCODE=RABBITWORLD">{{ site.got_notify_label[page.lang] }}</a></li>
+                  <li class="d-lg-none"><a href="https://rabbit-world.github.io/" target="_blank">{{ site.rabbit_world[page.lang] }}</a></li>
                 </ul>
               </div>
             </nav>
