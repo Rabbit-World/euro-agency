@@ -75,3 +75,7 @@ rabbit_world:
 countries_label:
   en: "Other Countries"
   it: "Altri Peasi"
+  
+read_label:
+  en: "Read more..."
+  it: "Leggi di più..."
