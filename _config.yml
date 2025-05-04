@@ -79,3 +79,7 @@ countries_label:
 read_label:
   en: "Read more..."
   it: "Leggi di più..."
+  
+follow_label:
+  en: "Example link"
+  it: "Link di esempio"
