@@ -1,0 +1,153 @@
+# Badges Configuration
+# This file defines all badges available in the gamification system
+# Each badge has a unique ID, name, description, requirements, points value, and image reference
+
+# Achievement Badges - Awarded for completing specific tasks or milestones
+achievement:
+  - id: first_login
+    name: "First Steps"
+    description: "Welcome to the community! You've taken your first step on an exciting journey."
+    requirements: "Log in to the platform for the first time"
+    points: 10
+    image: "first_login_badge.png"
+    
+  - id: profile_complete
+    name: "Identity Established"
+    description: "You've completed your profile information, making you a recognized member."
+    requirements: "Complete all profile information fields"
+    points: 25
+    image: "profile_complete_badge.png"
+    
+  - id: first_comment
+    name: "Voice Activated"
+    description: "You've joined the conversation by making your first comment."
+    requirements: "Post your first comment on any content"
+    points: 15
+    image: "first_comment_badge.png"
+    
+  - id: first_post
+    name: "Content Creator"
+    description: "You've shared your first piece of content with the community."
+    requirements: "Create your first post"
+    points: 30
+    image: "first_post_badge.png"
+    
+  - id: first_like
+    name: "Appreciation Shown"
+    description: "You've shown appreciation for someone else's contribution."
+    requirements: "Like someone's post or comment"
+    points: 5
+    image: "first_like_badge.png"
+
+# Expertise Badges - Awarded for demonstrating knowledge in specific areas
+expertise:
+  - id: beginner_quiz
+    name: "Knowledge Initiate"
+    description: "You've demonstrated basic understanding by completing the beginner quiz."
+    requirements: "Score at least 70% on the beginner quiz"
+    points: 50
+    image: "beginner_quiz_badge.png"
+    
+  - id: intermediate_quiz
+    name: "Knowledge Adept"
+    description: "You've shown intermediate understanding of key concepts."
+    requirements: "Score at least 70% on the intermediate quiz"
+    points: 100
+    image: "intermediate_quiz_badge.png"
+    
+  - id: advanced_quiz
+    name: "Knowledge Master"
+    description: "You've demonstrated advanced understanding and expertise."
+    requirements: "Score at least 80% on the advanced quiz"
+    points: 200
+    image: "advanced_quiz_badge.png"
+    
+  - id: perfect_score
+    name: "Perfect Mind"
+    description: "Perfection achieved! You've aced a quiz with a perfect score."
+    requirements: "Score 100% on any quiz"
+    points: 150
+    image: "perfect_score_badge.png"
+
+# Engagement Badges - Awarded for consistent participation
+engagement:
+  - id: weekly_streak_1
+    name: "Consistency Starter"
+    description: "You've visited the platform for 7 consecutive days."
+    requirements: "Log in for 7 consecutive days"
+    points: 70
+    image: "weekly_streak_badge.png"
+    
+  - id: monthly_streak
+    name: "Dedicated Member"
+    description: "You've maintained engagement for a full month."
+    requirements: "Log in for 30 consecutive days"
+    points: 300
+    image: "monthly_streak_badge.png"
+    
+  - id: content_curator
+    name: "Content Curator"
+    description: "You have an eye for quality, sharing valuable content with others."
+    requirements: "Share 10 posts from the platform to social media"
+    points: 120
+    image: "content_curator_badge.png"
+    
+  - id: active_commenter
+    name: "Conversation Catalyst"
+    description: "You keep discussions lively and engaging."
+    requirements: "Post 50 comments across the platform"
+    points: 200
+    image: "active_commenter_badge.png"
+
+# Challenge Badges - Awarded for completing specific challenges
+challenge:
+  - id: challenge_beginner
+    name: "Challenge Taker"
+    description: "You've successfully completed your first challenge."
+    requirements: "Complete any challenge"
+    points: 75
+    image: "challenge_beginner_badge.png"
+    
+  - id: challenge_master
+    name: "Challenge Master"
+    description: "You've proven your skills by completing multiple challenges."
+    requirements: "Complete 5 different challenges"
+    points: 250
+    image: "challenge_master_badge.png"
+    
+  - id: speed_demon
+    name: "Speed Demon"
+    description: "Lightning fast! You've completed a timed challenge in record time."
+    requirements: "Complete any timed challenge in the top 10% of all users"
+    points: 200
+    image: "speed_demon_badge.png"
+    
+  - id: persistence
+    name: "Persistence Pays Off"
+    description: "Your determination led you to success after multiple attempts."
+    requirements: "Complete a challenge after at least 3 failed attempts"
+    points: 150
+    image: "persistence_badge.png"
+
+# Community Badges - Awarded for community contributions
+community:
+  - id: helpful_member
+    name: "Helpful Hand"
+    description: "You've been recognized by the community for your helpful contributions."
+    requirements: "Receive 10 'helpful' ratings on your comments or posts"
+    points: 200
+    image: "helpful_member_badge.png"
+    
+  - id: community_leader
+    name: "Community Leader"
+    description: "You've emerged as a leader within the community."
+    requirements: "Have 50 followers and maintain high engagement"
+    points: 500
+    image: "community_leader_badge.png"
+    
+  - id: mentor
+    name: "Mentor"
+    description: "You've helped guide others on their journey."
+    requirements: "Help 5 new members complete their onboarding process"
+    points: 300
+    image: "mentor_badge.png"

@@ -1,0 +1,421 @@
+---
+layout: default
+---
+{% comment %}
+Quiz Layout
+This layout is used for quiz pages. It provides the structure for displaying
+quiz information, questions, and interactive elements.
+
+Front Matter Parameters:
+- title: Quiz title
+- description: Quiz description
+- points: Points awarded for completion
+- time_limit: Time limit in seconds (optional)
+- difficulty: Quiz difficulty level
+- category: Quiz category
+- passing_score: Minimum score required to pass (percentage)
+- questions: List of questions with answers
+{% endcomment %}
+
+<div class="quiz-page">
+  <div class="quiz-header">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <h1 class="quiz-title">{{ page.title }}</h1>
+          
+          <div class="quiz-meta">
+            <span class="quiz-category">{{ page.category | capitalize }}</span>
+            <span class="quiz-difficulty">{{ page.difficulty | capitalize }}</span>
+            <span class="quiz-points">{{ page.points }} points</span>
+            
+            {% if page.time_limit %}
+              <span class="quiz-time-limit">
+                <i class="fa fa-clock-o"></i>
+                {% assign minutes = page.time_limit | divided_by: 60 %}
+                {% if minutes < 60 %}
+                  {{ minutes }} min
+                {% else %}
+                  {% assign hours = minutes | divided_by: 60 %}
+                  {% assign remaining_minutes = minutes | modulo: 60 %}
+                  {{ hours }} hr {% if remaining_minutes > 0 %}{{ remaining_minutes }} min{% endif %}
+                {% endif %}
+              </span>
+            {% endif %}
+            
+            <span class="quiz-question-count">
+              <i class="fa fa-question-circle"></i>
+              {{ page.questions.size }} questions
+            </span>
+            
+            <span class="quiz-passing-score">
+              <i class="fa fa-check-circle"></i>
+              {{ page.passing_score }}% to pass
+            </span>
+          </div>
+          
+          <div class="quiz-description">
+            {{ page.description }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="quiz-content">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          {% if page.time_limit %}
+            <div class="quiz-timer" data-time-limit="{{ page.time_limit }}">
+              <div class="timer-display">
+                <span class="timer-value">00:00:00</span>
+                <span class="timer-label">Time Remaining</span>
+              </div>
+              <div class="timer-progress">
+                <div class="timer-progress-bar"></div>
+              </div>
+            </div>
+          {% endif %}
+          
+          <div class="quiz-instructions">
+            <h2>Instructions</h2>
+            {{ content }}
+          </div>
+          
+          <div class="quiz-progress">
+            <div class="progress-text">
+              <span class="current-question">1</span> of <span class="total-questions">{{ page.questions.size }}</span>
+            </div>
+            <div class="progress">
+              <div class="progress-bar" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+          </div>
+          
+          <form class="quiz-form">
+            <div class="questions-container">
+              {% for question in page.questions %}
+                <div class="question-item {% if forloop.index > 1 %}d-none{% endif %}" data-question-index="{{ forloop.index }}">
+                  <h3 class="question-number">Question {{ forloop.index }}</h3>
+                  <div class="question-text">{{ question.text }}</div>
+                  
+                  {% case question.type %}
+                    {% when 'multiple_choice' %}
+                      <div class="question-options">
+                        {% for option in question.options %}
+                          <div class="option-item">
+                            <input type="radio" name="question-{{ forloop.parentloop.index }}" 
+                                   id="question-{{ forloop.parentloop.index }}-option-{{ forloop.index }}" 
+                                   value="{{ forloop.index }}" required>
+                            <label for="question-{{ forloop.parentloop.index }}-option-{{ forloop.index }}">
+                              {{ option }}
+                            </label>
+                          </div>
+                        {% endfor %}
+                      </div>
+                    
+                    {% when 'checkbox' %}
+                      <div class="question-options">
+                        {% for option in question.options %}
+                          <div class="option-item">
+                            <input type="checkbox" name="question-{{ forloop.parentloop.index }}[]" 
+                                   id="question-{{ forloop.parentloop.index }}-option-{{ forloop.index }}" 
+                                   value="{{ forloop.index }}">
+                            <label for="question-{{ forloop.parentloop.index }}-option-{{ forloop.index }}">
+                              {{ option }}
+                            </label>
+                          </div>
+                        {% endfor %}
+                      </div>
+                    
+                    {% when 'text' %}
+                      <div class="question-text-input">
+                        <input type="text" name="question-{{ forloop.index }}" 
+                               placeholder="Your answer" required>
+                      </div>
+                    
+                    {% when 'textarea' %}
+                      <div class="question-textarea-input">
+                        <textarea name="question-{{ forloop.index }}" 
+                                  placeholder="Your answer" rows="4" required></textarea>
+                      </div>
+                  {% endcase %}
+                </div>
+              {% endfor %}
+            </div>
+            
+            <div class="quiz-navigation">
+              <button type="button" class="btn btn-outline-secondary prev-question" disabled>Previous</button>
+              <button type="button" class="btn btn-primary next-question">Next</button>
+              <button type="submit" class="btn btn-success submit-quiz d-none">Submit Quiz</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="quiz-results-modal modal fade" id="quizResultsModal" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Quiz Results</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="results-message">
+          <div class="results-icon">
+            <!-- Icon will be set by JavaScript based on pass/fail -->
+          </div>
+          <h3 class="results-title"><!-- Set by JavaScript --></h3>
+          <p class="results-description"><!-- Set by JavaScript --></p>
+          
+          <div class="results-stats">
+            <div class="stat-item">
+              <span class="stat-label">Score</span>
+              <span class="stat-value score-percentage">--</span>
+            </div>
+            
+            <div class="stat-item">
+              <span class="stat-label">Correct Answers</span>
+              <span class="stat-value correct-answers">--</span>
+            </div>
+            
+            <div class="stat-item">
+              <span class="stat-label">Time Taken</span>
+              <span class="stat-value time-taken">--:--:--</span>
+            </div>
+          </div>
+          
+          <div class="points-earned">
+            <span class="points-value"><!-- Set by JavaScript --></span>
+            <span class="points-label">Points Earned</span>
+          </div>
+          
+          <div class="badges-earned">
+            <!-- Badges will be dynamically inserted here by JavaScript -->
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-info review-answers">Review Answers</button>
+        <a href="{{ site.baseurl }}/quizzes/" class="btn btn-primary">More Quizzes</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Quiz variables
+    var quizForm = document.querySelector('.quiz-form');
+    var questionItems = document.querySelectorAll('.question-item');
+    var totalQuestions = questionItems.length;
+    var currentQuestionIndex = 0;
+    var userAnswers = [];
+    
+    // Navigation buttons
+    var prevButton = document.querySelector('.prev-question');
+    var nextButton = document.querySelector('.next-question');
+    var submitButton = document.querySelector('.submit-quiz');
+    
+    // Progress elements
+    var progressBar = document.querySelector('.quiz-progress .progress-bar');
+    var currentQuestionDisplay = document.querySelector('.quiz-progress .current-question');
+    
+    // Timer elements
+    var timerElement = document.querySelector('.quiz-timer');
+    var timeLimit = timerElement ? parseInt(timerElement.getAttribute('data-time-limit')) || 0 : 0;
+    var timerDisplay = timerElement ? timerElement.querySelector('.timer-value') : null;
+    var timerProgressBar = timerElement ? timerElement.querySelector('.timer-progress-bar') : null;
+    var timeRemaining = timeLimit;
+    var timerInterval;
+    
+    // Initialize timer if present
+    if (timerElement) {
+      function updateTimer() {
+        if (timeRemaining <= 0) {
+          clearInterval(timerInterval);
+          timeRemaining = 0;
+          // Auto-submit when time runs out
+          submitQuiz();
+        }
+        
+        var hours = Math.floor(timeRemaining / 3600);
+        var minutes = Math.floor((timeRemaining % 3600) / 60);
+        var seconds = timeRemaining % 60;
+        
+        timerDisplay.textContent = 
+          (hours < 10 ? '0' + hours : hours) + ':' +
+          (minutes < 10 ? '0' + minutes : minutes) + ':' +
+          (seconds < 10 ? '0' + seconds : seconds);
+        
+        var progressPercentage = ((timeLimit - timeRemaining) / timeLimit) * 100;
+        timerProgressBar.style.width = progressPercentage + '%';
+        
+        timeRemaining--;
+      }
+      
+      // Start the timer
+      updateTimer();
+      timerInterval = setInterval(updateTimer, 1000);
+    }
+    
+    // Show a specific question
+    function showQuestion(index) {
+      // Hide all questions
+      questionItems.forEach(function(item) {
+        item.classList.add('d-none');
+      });
+      
+      // Show the current question
+      questionItems[index].classList.remove('d-none');
+      
+      // Update progress
+      currentQuestionIndex = index;
+      currentQuestionDisplay.textContent = index + 1;
+      var progressPercentage = ((index + 1) / totalQuestions) * 100;
+      progressBar.style.width = progressPercentage + '%';
+      progressBar.setAttribute('aria-valuenow', progressPercentage);
+      
+      // Update button states
+      prevButton.disabled = index === 0;
+      
+      if (index === totalQuestions - 1) {
+        nextButton.classList.add('d-none');
+        submitButton.classList.remove('d-none');
+      } else {
+        nextButton.classList.remove('d-none');
+        submitButton.classList.add('d-none');
+      }
+    }
+    
+    // Handle navigation button clicks
+    prevButton.addEventListener('click', function() {
+      if (currentQuestionIndex > 0) {
+        showQuestion(currentQuestionIndex - 1);
+      }
+    });
+    
+    nextButton.addEventListener('click', function() {
+      if (currentQuestionIndex < totalQuestions - 1) {
+        // Check if current question is answered
+        var currentQuestion = questionItems[currentQuestionIndex];
+        var questionType = getQuestionType(currentQuestion);
+        var isAnswered = checkIfQuestionAnswered(currentQuestion, questionType);
+        
+        if (isAnswered) {
+          showQuestion(currentQuestionIndex + 1);
+        } else {
+          alert('Please answer the current question before proceeding.');
+        }
+      }
+    });
+    
+    // Helper function to get question type
+    function getQuestionType(questionElement) {
+      if (questionElement.querySelector('input[type="radio"]')) {
+        return 'multiple_choice';
+      } else if (questionElement.querySelector('input[type="checkbox"]')) {
+        return 'checkbox';
+      } else if (questionElement.querySelector('input[type="text"]')) {
+        return 'text';
+      } else if (questionElement.querySelector('textarea')) {
+        return 'textarea';
+      }
+      return null;
+    }
+    
+    // Helper function to check if question is answered
+    function checkIfQuestionAnswered(questionElement, type) {
+      switch (type) {
+        case 'multiple_choice':
+          return questionElement.querySelector('input[type="radio"]:checked') !== null;
+        case 'checkbox':
+          return questionElement.querySelector('input[type="checkbox"]:checked') !== null;
+        case 'text':
+          var textInput = questionElement.querySelector('input[type="text"]');
+          return textInput && textInput.value.trim() !== '';
+        case 'textarea':
+          var textarea = questionElement.querySelector('textarea');
+          return textarea && textarea.value.trim() !== '';
+        default:
+          return true;
+      }
+    }
+    
+    // Handle quiz submission
+    quizForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      submitQuiz();
+    });
+    
+    function submitQuiz() {
+      // In a real implementation, this would validate answers against correct answers
+      // and calculate the score
+      
+      // For demonstration, we'll simulate a score
+      var correctAnswers = Math.floor(Math.random() * (totalQuestions + 1)); // Random for demo
+      var scorePercentage = Math.round((correctAnswers / totalQuestions) * 100);
+      var passed = scorePercentage >= {{ page.passing_score }};
+      
+      // Calculate time taken (if timer exists)
+      var timeTaken = '';
+      if (timerElement) {
+        var timeElapsed = timeLimit - timeRemaining;
+        var hours = Math.floor(timeElapsed / 3600);
+        var minutes = Math.floor((timeElapsed % 3600) / 60);
+        var seconds = timeElapsed % 60;
+        
+        timeTaken = 
+          (hours < 10 ? '0' + hours : hours) + ':' +
+          (minutes < 10 ? '0' + minutes : minutes) + ':' +
+          (seconds < 10 ? '0' + seconds : seconds);
+          
+        document.querySelector('.time-taken').textContent = timeTaken;
+      }
+      
+      // Update results modal
+      var resultsModal = document.getElementById('quizResultsModal');
+      var resultsIcon = resultsModal.querySelector('.results-icon');
+      var resultsTitle = resultsModal.querySelector('.results-title');
+      var resultsDescription = resultsModal.querySelector('.results-description');
+      var scoreDisplay = resultsModal.querySelector('.score-percentage');
+      var correctAnswersDisplay = resultsModal.querySelector('.correct-answers');
+      var pointsEarned = resultsModal.querySelector('.points-value');
+      
+      // Set results based on pass/fail
+      if (passed) {
+        resultsIcon.innerHTML = '<i class="fa fa-check-circle text-success"></i>';
+        resultsTitle.textContent = 'Congratulations!';
+        resultsDescription.textContent = 'You passed the quiz successfully.';
+        pointsEarned.textContent = {{ page.points }};
+      } else {
+        resultsIcon.innerHTML = '<i class="fa fa-times-circle text-danger"></i>';
+        resultsTitle.textContent = 'Not Quite There';
+        resultsDescription.textContent = 'You didn\'t reach the passing score. Try again!';
+        pointsEarned.textContent = '0';
+      }
+      
+      scoreDisplay.textContent = scorePercentage + '%';
+      correctAnswersDisplay.textContent = correctAnswers + ' / ' + totalQuestions;
+      
+      // Show results modal
+      $('#quizResultsModal').modal('show');
+      
+      // In a real implementation, this would update the user's points
+      // For demonstration, we'll just log to console
+      console.log('Quiz completed! Score: ' + scorePercentage + '%');
+      if (passed) {
+        console.log('Points earned: {{ page.points }}');
+      }
+    }
+    
+    // Initialize the quiz
+    showQuestion(0);
+  });
+</script>

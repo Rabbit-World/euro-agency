@@ -1,0 +1,195 @@
+---
+layout: default
+---
+
+{% assign quiz_id = page.quiz_id %}
+{% assign user_level = site.data.user_level | default: 1 %}
+{% assign is_locked = page.required_level > user_level %}
+{% assign is_completed = site.data.user_quizzes[quiz_id].completed | default: false %}
+{% assign best_score = site.data.user_quizzes[quiz_id].best_score | default: 0 %}
+
+<div class="container my-5">
+  <div class="row">
+    <div class="col-md-8">
+      <div class="quiz-container gamification-quiz" data-quiz-id="{{ quiz_id }}">
+        <div class="quiz-header">
+          <h2 class="quiz-title">{{ page.title }}</h2>
+          <p class="quiz-description">{{ page.description }}</p>
+        </div>
+        
+        <div class="quiz-body">
+          {% if is_completed %}
+            <div class="quiz-intro">
+              <p>{{ site.data.gamification.quiz_completed_message[page.lang] | default: "You have already completed this quiz." }}</p>
+              <p>{{ site.data.gamification.best_score[page.lang] | default: "Your best score" }}: {{ best_score }}%</p>
+              <button class="gamification-button quiz-start">
+                {{ site.data.gamification.retake_quiz[page.lang] | default: "Retake Quiz" }}
+              </button>
+            </div>
+          {% elsif is_locked %}
+            <div class="quiz-locked">
+              <p>{{ site.data.gamification.quiz_locked_message[page.lang] | default: "This quiz requires level" }} {{ page.required_level }} {{ site.data.gamification.to_attempt[page.lang] | default: "to attempt." }}</p>
+            </div>
+          {% else %}
+            <div class="quiz-intro">
+              <p>{{ page.intro_text }}</p>
+              {% if page.time_limit %}
+                <p>{{ site.data.gamification.time_limit[page.lang] | default: "Time limit" }}: {{ page.time_limit | divided_by: 60 }} {{ site.data.gamification.minutes[page.lang] | default: "minutes" }}</p>
+              {% endif %}
+              <button class="gamification-button quiz-start">
+                {{ site.data.gamification.start_quiz[page.lang] | default: "Start Quiz" }}
+              </button>
+            </div>
+          {% endif %}
+          
+          <form class="quiz-form" data-quiz-id="{{ quiz_id }}">
+            {% if page.time_limit %}
+              <div class="quiz-timer" data-time-limit="{{ page.time_limit }}">
+                {{ page.time_limit | divided_by: 60 }}:{{ page.time_limit | modulo: 60 | prepend: '00' | slice: -2, 2 }}
+              </div>
+            {% endif %}
+            
+            {% assign question_number = 0 %}
+            {% for question in page.questions %}
+              {% assign question_number = question_number | plus: 1 %}
+              <div class="quiz-question" data-question-type="{{ question.type }}" data-question-id="q{{ question_number }}">
+                <h3 class="quiz-question-text">{{ question_number }}. {{ question.text }}</h3>
+                
+                <div class="quiz-options">
+                  {% case question.type %}
+                    {% when "multiple-choice" %}
+                      {% for option in question.options %}
+                        <div class="quiz-option">
+                          <input type="radio" name="q{{ question_number }}" id="q{{ question_number }}_{{ forloop.index }}" value="{{ forloop.index }}" data-correct="{{ option.correct }}">
+                          <label for="q{{ question_number }}_{{ forloop.index }}">{{ option.text }}</label>
+                        </div>
+                      {% endfor %}
+                    
+                    {% when "checkbox" %}
+                      {% for option in question.options %}
+                        <div class="quiz-option">
+                          <input type="checkbox" name="q{{ question_number }}[]" id="q{{ question_number }}_{{ forloop.index }}" value="{{ forloop.index }}" data-correct="{{ option.correct }}">
+                          <label for="q{{ question_number }}_{{ forloop.index }}">{{ option.text }}</label>
+                        </div>
+                      {% endfor %}
+                    
+                    {% when "text" %}
+                      <div class="quiz-option">
+                        <input type="text" name="q{{ question_number }}" id="q{{ question_number }}" data-correct="{{ question.answer }}">
+                      </div>
+                  {% endcase %}
+                </div>
+              </div>
+            {% endfor %}
+            
+            <div class="quiz-navigation">
+              <button type="button" class="gamification-button quiz-prev" disabled>
+                {{ site.data.gamification.previous[page.lang] | default: "Previous" }}
+              </button>
+              <button type="button" class="gamification-button quiz-next">
+                {{ site.data.gamification.next[page.lang] | default: "Next" }}
+              </button>
+              <button type="submit" class="gamification-button quiz-submit">
+                {{ site.data.gamification.submit[page.lang] | default: "Submit" }}
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+      
+      {% if page.show_related_quizzes %}
+        <div class="related-quizzes gamification-mt-3">
+          <h3>{{ site.data.gamification.related_quizzes[page.lang] | default: "Related Quizzes" }}</h3>
+          <div class="row">
+            {% assign related_quizzes = site.quizzes | where: "category", page.category | limit: 3 %}
+            {% for related in related_quizzes %}
+              {% if related.quiz_id != quiz_id %}
+                <div class="col-md-4">
+                  <div class="related-quiz-card">
+                    <h4>{{ related.title }}</h4>
+                    <p>{{ related.description | truncate: 100 }}</p>
+                    <a href="{{ related.url | relative_url }}" class="gamification-button">
+                      {{ site.data.gamification.view_quiz[page.lang] | default: "View Quiz" }}
+                    </a>
+                  </div>
+                </div>
+              {% endif %}
+            {% endfor %}
+          </div>
+        </div>
+      {% endif %}
+    </div>
+    
+    <div class="col-md-4">
+      <div class="quiz-sidebar">
+        {% include gamification/level-progress.html compact=true %}
+        
+        <div class="gamification-container gamification-mt-3">
+          <h3 class="gamification-title">{{ site.data.gamification.quiz_info[page.lang] | default: "Quiz Information" }}</h3>
+          <ul class="quiz-info-list">
+            <li>{{ site.data.gamification.questions[page.lang] | default: "Questions" }}: {{ page.questions.size }}</li>
+            <li>{{ site.data.gamification.category[page.lang] | default: "Category" }}: {{ page.category }}</li>
+            {% if page.time_limit %}
+              <li>{{ site.data.gamification.time_limit[page.lang] | default: "Time limit" }}: {{ page.time_limit | divided_by: 60 }} {{ site.data.gamification.minutes[page.lang] | default: "minutes" }}</li>
+            {% endif %}
+            <li>{{ site.data.gamification.difficulty[page.lang] | default: "Difficulty" }}: {{ page.difficulty }}</li>
+            <li>{{ site.data.gamification.points[page.lang] | default: "Points" }}: {{ page.points }}</li>
+          </ul>
+        </div>
+        
+        {% if page.required_level > 1 %}
+          <div class="gamification-container gamification-mt-3">
+            <h3 class="gamification-title">{{ site.data.gamification.requirements[page.lang] | default: "Requirements" }}</h3>
+            <p>{{ site.data.gamification.minimum_level[page.lang] | default: "Minimum Level" }}: {{ page.required_level }}</p>
+          </div>
+        {% endif %}
+        
+        {% if page.show_badges %}
+          <div class="gamification-container gamification-mt-3">
+            <h3 class="gamification-title">{{ site.data.gamification.related_badges[page.lang] | default: "Related Badges" }}</h3>
+            {% include gamification/badge-display.html max_badges=3 %}
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Initialize quiz functionality
+    if (window.GamificationInteractive) {
+      GamificationInteractive.init();
+      
+      // Hide quiz form initially
+      const quizForm = document.querySelector('.quiz-form');
+      if (quizForm) {
+        quizForm.style.display = 'none';
+      }
+      
+      // Show first question when quiz starts
+      const startButton = document.querySelector('.quiz-start');
+      if (startButton) {
+        startButton.addEventListener('click', function() {
+          const quizIntro = document.querySelector('.quiz-intro');
+          if (quizIntro) {
+            quizIntro.style.display = 'none';
+          }
+          
+          if (quizForm) {
+            quizForm.style.display = 'block';
+          }
+          
+          const questions = document.querySelectorAll('.quiz-question');
+          if (questions.length > 0) {
+            questions[0].classList.add('active');
+          }
+          
+          // Start timer if present
+          const quizId = document.querySelector('.gamification-quiz').dataset.quizId;
+          GamificationInteractive.startQuiz(quizId);
+        });
+      }
+    }
+  });
+</script>

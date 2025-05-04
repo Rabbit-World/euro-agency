@@ -1,0 +1,181 @@
+# Gamification System Configuration for Euro-Agency Jekyll Template
+
+# Site settings
+title: Euro-Agency with Gamification
+description: A Jekyll template with integrated gamification elements
+baseurl: "/test"
+url: "https://rabbit-world.github.io/euro-agency"
+
+# Gamification System Settings
+gamification:
+  enabled: true
+  version: "1.0.0"
+  
+  # Points System
+  points:
+    enabled: true
+    starting_points: 0
+    challenge_multiplier: 1.0
+    quiz_multiplier: 1.0
+    daily_bonus: 5
+    streak_bonus: true
+  
+  # Level System
+  levels:
+    enabled: true
+    xp_to_points_ratio: 1
+    level_progression:
+      - level: 1
+        name: "Novice"
+        min_points: 0
+        badge: "level_1"
+      - level: 2
+        name: "Apprentice"
+        min_points: 100
+        badge: "level_2"
+      - level: 3
+        name: "Journeyman"
+        min_points: 250
+        badge: "level_3"
+      - level: 4
+        name: "Expert"
+        min_points: 500
+        badge: "level_4"
+      - level: 5
+        name: "Master"
+        min_points: 1000
+        badge: "level_5"
+      - level: 6
+        name: "Grandmaster"
+        min_points: 2000
+        badge: "level_6"
+  
+  # Badge System
+  badges:
+    enabled: true
+    display_in_profile: true
+    display_recent: 5
+    categories:
+      - name: "achievements"
+        display_name: "Achievements"
+      - name: "skills"
+        display_name: "Skills"
+      - name: "participation"
+        display_name: "Participation"
+      - name: "special"
+        display_name: "Special"
+  
+  # Challenge System
+  challenges:
+    enabled: true
+    categories:
+      - name: "coding"
+        display_name: "Coding Challenges"
+      - name: "design"
+        display_name: "Design Challenges"
+      - name: "creative"
+        display_name: "Creative Challenges"
+    difficulty_levels:
+      - beginner
+      - intermediate
+      - advanced
+    points_by_difficulty:
+      beginner: 50
+      intermediate: 100
+      advanced: 200
+  
+  # Quiz System
+  quizzes:
+    enabled: true
+    pass_threshold: 70
+    show_explanations: true
+    retry_allowed: true
+    points_by_difficulty:
+      beginner: 50
+      intermediate: 100
+      advanced: 200
+  
+  # Leaderboard
+  leaderboard:
+    enabled: true
+    display_count: 10
+    categories:
+      - points
+      - challenges_completed
+      - quizzes_completed
+    reset_frequency: never # Options: daily, weekly, monthly, yearly, never
+  
+  # Progress Tracking
+  progress:
+    track_page_views: true
+    track_time_spent: true
+    track_interactions: true
+    save_to_local_storage: true
+    sync_with_server: false # Set to true if implementing server-side storage
+  
+  # Notifications
+  notifications:
+    enabled: true
+    display_time: 5000 # milliseconds
+    types:
+      - points_earned
+      - level_up
+      - badge_earned
+      - challenge_completed
+      - quiz_completed
+
+# Integration with Euro-Agency Template
+euro_agency:
+  gamification_nav_item: true
+  show_points_in_header: true
+  show_level_in_profile: true
+  show_badges_in_profile: true
+  gamification_page_path: "/gamification"
+
+# Build settings
+markdown: kramdown
+permalink: pretty
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+
+# Exclude from processing
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor
+  - .git
+  - .github
+  - README.md
+  - LICENSE
+
+# Collections for gamification content
+collections:
+  badges:
+    output: true
+    permalink: /badges/:path/
+  challenges:
+    output: true
+    permalink: /challenges/:path/
+  quizzes:
+    output: true
+    permalink: /quizzes/:path/
+
+# Default front matter for collections
+defaults:
+  - scope:
+      path: ""
+      type: "challenges"
+    values:
+      layout: "challenge"
+  - scope:
+      path: ""
+      type: "quizzes"
+    values:
+      layout: "quiz"
+  - scope:
+      path: ""
+      type: "badges"
+    values:
+      layout: "badge"

@@ -1,0 +1,78 @@
+# Gamification System Configuration
+# This file demonstrates how to configure the gamification system in a Jekyll site
+
+# Site settings
+title: Euro-Agency with Gamification
+description: A Jekyll template with integrated gamification features
+baseurl: "/gamification-system"
+url: "https://rabbit-world.github.io/gamification-with-jekyll"
+
+# Build settings
+markdown: kramdown
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+
+# Gamification settings
+gamification:
+  enabled: true
+  points_display: true
+  level_display: true
+  badges_display: true
+  challenges_enabled: true
+  quizzes_enabled: true
+  
+  # Default settings for new users
+  default_points: 0
+  default_level: 1
+  default_badges: []
+  
+  # Storage settings
+  storage_method: "local_storage"  # Options: local_storage, server_side
+  
+  # Badge settings
+  badge_image_path: "/assets/images/badges/"
+  
+  # Challenge settings
+  challenge_path: "/challenges/"
+  
+  # Quiz settings
+  quiz_path: "/quizzes/"
+
+# Collections
+collections:
+  challenges:
+    output: true
+    permalink: /challenges/:path/
+  quizzes:
+    output: true
+    permalink: /quizzes/:path/
+
+# Default front matter for collections
+defaults:
+  - scope:
+      path: ""
+      type: "challenges"
+    values:
+      layout: "challenge"
+  - scope:
+      path: ""
+      type: "quizzes"
+    values:
+      layout: "quiz"
+
+# Include gamification data files
+include:
+  - _data/badges.yml
+  - _data/levels.yml
+  - _data/challenges.yml
+
+# Exclude files from processing
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor
+  - .git
+  - .gitignore
+  - README.md
