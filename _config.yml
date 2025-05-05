@@ -83,3 +83,7 @@ read_label:
 example_label:
   en: "Example link"
   it: "Link di esempio"
+
+contacts_label:
+  en: "Contacts"
+  it: "Contatti"
