@@ -1,0 +1,17 @@
+# Main navigation menu
+main:
+  - text: Home
+    url: /
+    icon: home
+  
+  - text: Blog
+    url: /blog/
+    icon: book
+  
+  - text: About
+    url: /about/
+    icon: info-circle
+  
+  - text: Admin Panel
+    url: /admin-panel/
+    icon: cog
