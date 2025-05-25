@@ -1,0 +1,118 @@
+backend:
+  name: github
+  repo: Rabbit-World/euro-agency  # Replace with your GitHub username and repository name
+  branch: main  # Replace with your default branch name
+  auth_scope: repo  # Needed for proper repository access
+
+# Publish mode, editorial workflow means content goes through drafts -> review -> ready
+publish_mode: editorial_workflow
+
+# Media folder where uploaded images will be stored in the repo
+media_folder: "assets/images/uploads"
+public_folder: "/assets/images/uploads"
+
+# Display URL for the CMS interface
+site_url: https://rabbit-world.github.io/euro-agency
+display_url: https://username.github.io/euro-agency/admin
+
+# Collections define the structure for content types
+collections:
+  - name: "posts"
+    label: "Blog Posts"
+    folder: "_posts"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    preview_path: "blog/{{year}}/{{month}}/{{day}}/{{slug}}"
+    fields:
+      - {label: "Layout", name: "layout", widget: "hidden", default: "post"}
+      - {label: "Title", name: "title", widget: "string"}
+      - {label: "Publish Date", name: "date", widget: "datetime"}
+      - {label: "Categories", name: "categories", widget: "list", required: false}
+      - {label: "Tags", name: "tags", widget: "list", required: false}
+      - {label: "Featured Image", name: "image", widget: "image", required: false}
+      - {label: "Image Alt Text", name: "image_alt", widget: "string", required: false}
+      - {label: "Excerpt", name: "excerpt", widget: "text", required: false}
+      - {label: "Body", name: "body", widget: "markdown"}
+  
+  - name: "pages"
+    label: "Pages"
+    folder: "_pages"
+    create: true
+    slug: "{{slug}}"
+    preview_path: "{{permalink}}"
+    fields:
+      - {label: "Layout", name: "layout", widget: "hidden", default: "page"}
+      - {label: "Title", name: "title", widget: "string"}
+      - {label: "Permalink", name: "permalink", widget: "string", pattern: ['^\/.*\/$', "Must start and end with a slash"]}
+      - {label: "Featured Image", name: "image", widget: "image", required: false}
+      - {label: "Image Alt Text", name: "image_alt", widget: "string", required: false}
+      - {label: "Body", name: "body", widget: "markdown"}
+
+  - name: "config"
+    label: "Configuration"
+    editor:
+      preview: false
+    files:
+      - label: "Site Configuration"
+        name: "config"
+        file: "_config.yml"
+        fields:
+          - {label: "Site Title", name: "title", widget: "string"}
+          - {label: "Site Description", name: "description", widget: "string"}
+          - {label: "Base URL", name: "baseurl", widget: "string", required: false}
+          - {label: "URL", name: "url", widget: "string", required: false}
+          - {label: "GitHub Username", name: "github_username", widget: "string"}
+          - {label: "GitHub Repository", name: "github_repo", widget: "string"}
+          - {label: "GitHub Branch", name: "github_branch", widget: "string", default: "main"}
+          - {label: "Show Admin Link", name: "show_admin_link", widget: "boolean", default: true}
+      
+      - label: "Navigation Menu"
+        name: "navigation"
+        file: "_data/navigation.yml"
+        fields:
+          - label: "Navigation Items"
+            name: "main"
+            widget: "list"
+            fields:
+              - {label: "Text", name: "text", widget: "string"}
+              - {label: "URL", name: "url", widget: "string"}
+              - {label: "Icon (optional)", name: "icon", widget: "string", required: false}
+
+  - name: "includes"
+    label: "Layout Components"
+    editor:
+      preview: false
+    files:
+      - label: "Header"
+        name: "header"
+        file: "_includes/header.html"
+        fields:
+          - {label: "Header Content", name: "content", widget: "code", default_language: "html"}
+      
+      - label: "Footer"
+        name: "footer"
+        file: "_includes/footer.html"
+        fields:
+          - {label: "Footer Content", name: "content", widget: "code", default_language: "html"}
+      
+      - label: "Navigation"
+        name: "navigation"
+        file: "_includes/navigation.html"
+        fields:
+          - {label: "Navigation Content", name: "content", widget: "code", default_language: "html"}
+
+# Media library settings
+media_library:
+  name: uploadcare
+  config:
+    publicKey: demopublickey # Replace with your Uploadcare public key in production
+    multiple: true
+    tabs: "file camera url facebook gdrive gphotos"
+    effects: "crop,rotate,enhance,grayscale"
+    imageShrink: "2000x2000"
+    previewStep: true
+    clearable: true
+
+# Editor settings
+editor:
+  preview: true

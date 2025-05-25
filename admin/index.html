@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Content Manager | Jekyll GitHub CMS</title>
+  
+  <!-- Include the styles for the Decap CMS UI -->
+  <link rel="stylesheet" href="https://unpkg.com/@staticcms/app@^3.0.0/dist/main.css" />
+  
+  <!-- Custom admin styles -->
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    
+    .header {
+      background-color: #24292e;
+      color: white;
+      padding: 1rem;
+      text-align: center;
+      margin-bottom: 0;
+    }
+    
+    .header h1 {
+      margin: 0;
+      font-size: 1.5rem;
+    }
+    
+    .header p {
+      margin: 0.5rem 0 0;
+      opacity: 0.8;
+      font-size: 0.9rem;
+    }
+    
+    .back-link {
+      display: inline-block;
+      margin-top: 1rem;
+      color: white;
+      text-decoration: none;
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      padding: 0.25rem 0.75rem;
+      border-radius: 3px;
+      font-size: 0.9rem;
+      transition: all 0.2s ease;
+    }
+    
+    .back-link:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+    
+    .loading {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 50vh;
+      flex-direction: column;
+    }
+    
+    .loading-text {
+      margin-top: 1rem;
+      font-size: 1.2rem;
+      color: #24292e;
+    }
+    
+    .spinner {
+      border: 4px solid rgba(0, 0, 0, 0.1);
+      border-radius: 50%;
+      border-top: 4px solid #24292e;
+      width: 40px;
+      height: 40px;
+      animation: spin 1s linear infinite;
+    }
+    
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    
+    /* Custom CMS UI overrides */
+    .nc-githubAuthenticationPage-button {
+      background-color: #24292e !important;
+    }
+    
+    /* Improve mobile experience */
+    @media (max-width: 799px) {
+      .header h1 {
+        font-size: 1.2rem;
+      }
+      
+      .header p {
+        font-size: 0.8rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>Jekyll GitHub CMS Admin</h1>
+    <p>Content Management System</p>
+    <a href="../" class="back-link">← Back to site</a>
+  </div>
+  
+  <!-- Loading indicator -->
+  <div class="loading" id="loading">
+    <div class="spinner"></div>
+    <p class="loading-text">Loading CMS...</p>
+  </div>
+  
+  <!-- Include the script that builds the page and powers Decap CMS -->
+  <script src="https://unpkg.com/@staticcms/app@^3.0.0/dist/static-cms-app.js"></script>
+  <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/prop-types@15.7.2/prop-types.js"></script>
+  <script src="https://unpkg.com/netlify-cms-app@2.15.72/dist/netlify-cms-app.js"></script>
+  <script>
+    const { createClass, h, Component } = window.React;
+  </script>
+  
+  <!-- Include custom widgets -->
+  <script src="./widgets/repository-browser-widget.js"></script>
+  
+  <!-- Include preview templates -->
+  <script src="./preview-templates.js"></script>
+  
+  <script>
+    // Hide loading indicator when CMS is loaded
+    window.addEventListener('load', function() {
+      // Initialize Decap CMS
+      window.CMS.init({
+        // Config options can be passed here if needed
+        // For example, to enable local_backend for local development:
+        // config: {
+        //   local_backend: true
+        // }
+      });
+      
+      // Add event listener for CMS load
+      window.CMS.registerEventListener({
+        name: 'onInit', // When the CMS is initialized
+        handler: function() {
+          document.getElementById('loading').style.display = 'none';
+        },
+      });
+    });
+  </script>
+</body>
+</html>
