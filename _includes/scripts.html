@@ -22,10 +22,9 @@ window.smartsupp||(function(d) {
 
 <script>
   // init
-  window.smartsupp = window.smartsupp || function() { (window.smartsupp.q = window.smartsupp.q || []).push(arguments) };
-  if (window.location.href.indexOf("/de/") > -1) {
+  if (window.location.pathname.indexOf("/de/") === 0) {
     smartsupp('language', 'de');
-  } else if (window.location.href.indexOf("/it/") > -1) {
+  } else if (window.location.pathname.indexOf("/it/") === 0) {
     smartsupp('language', 'it');
   } else {
     smartsupp('language', 'en');
