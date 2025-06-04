@@ -8,6 +8,16 @@
 <script src="{{ site.baseurl }}/assets/main.js"></script>
 
 <!-- Smartsupp Live Chat script -->
+<script>
+if (window.location.href.indexOf("https://rabbit-world.github.io/euro-agency/de/") > -1) { //choose URL
+  smartsupp('language', 'de'); //set DE language
+} else if (window.location.href.indexOf("https://rabbit-world.github.io/euro-agency/it/") > -1) { //choose URL
+  smartsupp('language', 'it'); // set IT language
+} else {
+  smartsupp('language', 'en'); // set EN language
+}
+</script>
+
 <script type="text/javascript">
 var _smartsupp = _smartsupp || {};
 _smartsupp.key = '61934f22d13e4d24279a3d0e790384a50c4d82c9';
@@ -19,19 +29,3 @@ window.smartsupp||(function(d) {
 })(document);
 </script>
 <noscript> Powered by <a href=“https://www.smartsupp.com” target=“_blank”>Smartsupp</a></noscript>
-
-<script>
-if (window.location.href.indexOf("https://rabbit-world.github.io/euro-agency/de/") > -1) { //choose URL
-  smartsupp('language', 'de'); //set DE language
-} else if (window.location.href.indexOf("https://rabbit-world.github.io/euro-agency/it/") > -1) { //choose URL
-  smartsupp('language', 'it'); // set IT language
-} else if (window.location.href.indexOf("https://rabbit-world.github.io/euro-agency/ro/") > -1) { //choose URL
-  smartsupp('language', 'ro'); // set RO language
-} else if (window.location.href.indexOf("https://rabbit-world.github.io/euro-agency/fr/") > -1) { //choose URL
-  smartsupp('language', 'fr'); // set FR language
-} else if (window.location.href.indexOf("https://rabbit-world.github.io/euro-agency/es/") > -1) { //choose URL
-  smartsupp('language', 'es'); // set ES language
-} else {
-  smartsupp('language', 'en'); // set EN language
-}
-</script>
